@@ -1,0 +1,39 @@
+<div id="<%= dom_id order %>">
+	<div>
+		<%= "订单号：" + order.id.to_s %>
+	</div>
+	<ul>
+	<% order.order_items.each do |item| %>
+		<li>
+			<%= item.product_type.product.product_name %>
+			<%= item.product_type.product_type_name %>
+			<%= "x" + item.quantity.to_s %>
+			<%= item.price %>
+		</li>
+	<% end %>
+	</ul>
+	<div>
+		<%= "总金额：" + order.price.to_s %>
+	</div>
+	<div>
+		<%= "状态：" + order.status %>
+	</div>
+	<div>
+		<%= "收件地址：" + order.delivery_address %>
+	<div>
+	<div>
+		<%= "收件人：" + order.delivery_name %>
+	<div>
+	<div>
+		<%= "电话：" + order.delivery_phone %>
+	<div>
+	<div>
+		<%= "电话：" + order.delivery_phone %>
+	<div>
+	<% if order.status == "已下单" %>
+		<%= form_with(model: order) do |f| %>
+			<%= f.hidden_field :status, value: "已取消" %>
+			<%= f.submit '取消订单' %>
+		<% end %>
+	<% end %>
+</div>

@@ -1,0 +1,26 @@
+<div id="<%= dom_id user %>">
+  <p>
+    <strong>Username:</strong>
+    <%= user.username %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= user.email %>
+  </p>
+
+  <p>
+    <strong>Favorite:</strong>
+    <% user.favorite_products.each do |product| %>
+      <%= product.product_name %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Shopping Cart:</strong>
+    <% user.cart_items.each do |cart_item| %>
+      <%= cart_item.product.product_name + " " + cart_item.quantity.to_s %>
+    <% end %>
+  </p>
+
+</div>

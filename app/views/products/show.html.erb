@@ -1,0 +1,41 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @product %>
+
+<div>
+  <p>
+    <%= form_with model: @cart_item do |f| %>
+      <div>
+        <%= f.label :product_type_id, '类型' %>
+        <%= f.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]}, prompt: '选择商品类型' %>
+      </div>
+
+      <div class="field">
+        <% if @cart_item.product_type_id.blank? %>
+          <p class="warning"> 请选择商品类型 </p>
+        <% end %>
+      </div>
+          
+      <div>
+        <%= f.label :quantity, '数量:' %><br>
+        <%= f.number_field :quantity, :value => 1, step: 1, min: 1 %>
+      </div>
+
+      <%= f.submit '立即购买', name: "buy" %>
+      <%= f.submit '加入购物车', name: "cart" %>
+    <% end %>
+  </p>
+
+  <p> 
+    <% if current_user.favorite?(@product) %>
+      <%= button_to '取消收藏', product_favorite_path(@product), method: :delete %>
+    <% else %>
+      <%= button_to '收藏', product_favorite_path(@product), method: :post %>
+    <% end %>
+  </p>
+
+  <%= link_to "Edit this product", edit_product_path(@product) %> |
+  <%= link_to "Back to products", products_path %>
+
+  <%= button_to "Destroy this product", @product, method: :delete %>
+</div>

@@ -1,0 +1,9 @@
+<h1> 购物车 </h1>
+
+<div id="cart_items">
+  <% @cart_items.each do |cart_item| %>
+		<div>
+    	<%= link_to cart_item.product_type.product.product_name + ": " + cart_item.product_type.product_type_name, cart_item.product_type.product %>
+		</div>
+  <% end %>
+</div>

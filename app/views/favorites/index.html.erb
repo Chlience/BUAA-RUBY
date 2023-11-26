@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Favorites</h1>
+
+<div id="favorites">
+  <% @favorites.each do |favorite| %>
+    <%= link_to favorite.favorite_product.product_name, favorite.favorite_product %>
+    <%= button_to '取消收藏', favorite_path(favorite), method: :delete %>
+  <% end %>
+</div>
