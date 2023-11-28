@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # default: 0 means that the default value of the role attribute is 0, which corresponds to the user role.
+  enum role: [:user, :admin]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

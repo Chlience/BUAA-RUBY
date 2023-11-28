@@ -25,9 +25,9 @@ Rails.application.routes.draw do
     resources :product_types, only: [:show]
   end
 
-  root "products#index"
-
   resources :favorites, only: [:index]
   delete 'favorites/:id', to: 'favorites#delete', as: 'favorite'
+
+  root "pages#main"
 
 end
