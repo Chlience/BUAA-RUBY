@@ -1,29 +1,37 @@
-<h1>购物车</h1>
-
-<%= form_with(model: @order) do |f| %>
-	<% @cart_items.each do |cart_item| %>
-		<div>
-			<%= f.check_box :cart_item_ids, { multiple: true }, cart_item.id, nil %>
-			<%= link_to cart_item.product_type.product.product_name, cart_item.product_type.product %>
-			<%= cart_item.product_type.product_type_name %>
-			<%= cart_item.product_type.price %>
-			<%= "x" + cart_item.quantity.to_s %>
-		</div>
-	<% end %>
-
-	<div>
-		<%= f.label :delivery_address, style: "display: block" %>
-		<%= f.text_field :delivery_address %>
-	</div>
-
-	<div>
-		<%= f.label :delivery_phone, style: "display: block" %>
-		<%= f.text_field :delivery_phone %>
-	</div>
-
-	<div>
-		<%= f.label :delivery_name, style: "display: block" %>
-		<%= f.text_field :delivery_name %>
-	</div>
-	<%= f.submit %>
-<% end %>
+<div id="cart">
+  <div class="cart-fliter-bar">
+    <h1> 购物车 </h1>
+  </div>
+  <%= form_with(model: @order, class: "cart-form") do |f| %>
+    <% @cart_items.each do |cart_item| %>
+      <div class="container cart-item-container">
+        <%= f.check_box :cart_item_ids, { multiple: true }, cart_item.id, nil %>
+        <div class="cart-son">
+          <%= link_to cart_item.product_type.product.product_name, cart_item.product_type.product %>
+        </div>
+        <div class="cart-son item-props">
+          <%= cart_item.product_type.product_type_name %>
+        </div>
+        <div class="cart-son">
+          <%= cart_item.product_type.price %>
+        </div>
+        <div class="cart-son">
+          <%= "数量：" + cart_item.quantity.to_s %>
+        </div>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :delivery_address, style: "display: block" %>
+      <%= f.text_field :delivery_address %>
+    </div>
+    <div>
+      <%= f.label :delivery_phone, style: "display: block" %>
+      <%= f.text_field :delivery_phone %>
+    </div>
+    <div>
+      <%= f.label :delivery_name, style: "display: block" %>
+      <%= f.text_field :delivery_name %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+</div>
