@@ -1,6 +1,34 @@
-<div id="favorites">
-  <% @favorites.each do |favorite| %>
-    <%= link_to favorite.favorite_product.product_name, favorite.favorite_product %>
-    <%= button_to '取消收藏', favorite_path(favorite), method: :delete %>
-  <% end %>
+<div class="container manage-table-container" >
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">名称</th>
+        <th scope="col"></th>
+        <th scope="col">描述</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @favorites.each do |favorite| %>
+        <tr>
+          <th scope="row"> <%= favorite.favorite_product.id %> </th>
+          <td>
+            <img class="product_pic" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" >
+          </td>
+          <td>
+            <%= link_to favorite.favorite_product.product_name, favorite.favorite_product %>
+          </td>
+          <td> <%= favorite.favorite_product.description %> </td>
+          <td>
+            <div class="btn-group me-2">
+              <%= button_to favorite_path(favorite), method: :delete, class:"btn btn-danger" do %>
+                取消收藏
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
