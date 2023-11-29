@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_060441) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_132054) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "quantity"
@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_060441) do
 
   create_table "product_type_colors", force: :cascade do |t|
     t.integer "product_type_id", null: false
-    t.string "color"
+    t.string "color", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "\"product_type\", \"color\"", name: "unique_color", unique: true
@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_060441) do
 
   create_table "product_type_sizes", force: :cascade do |t|
     t.integer "product_type_id", null: false
-    t.string "size"
+    t.string "size", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "\"product_type\", \"size\"", name: "unique_size", unique: true
@@ -77,8 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_060441) do
 
   create_table "product_types", force: :cascade do |t|
     t.integer "product_id", null: false
-    t.string "product_type_name"
-    t.float "price"
+    t.string "product_type_name", null: false
+    t.float "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_types_on_product_id"
