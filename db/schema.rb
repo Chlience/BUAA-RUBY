@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_28_105759) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_060441) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "product_type_id", null: false
+    t.string "size"
+    t.string "color"
     t.index ["product_type_id"], name: "index_cart_items_on_product_type_id"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
@@ -37,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_105759) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "size"
+    t.string "color"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_type_id"], name: "index_order_items_on_product_type_id"
   end
@@ -51,6 +55,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_105759) do
     t.float "price"
     t.string "status"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "product_type_colors", force: :cascade do |t|
+    t.integer "product_type_id", null: false
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "\"product_type\", \"color\"", name: "unique_color", unique: true
+    t.index ["product_type_id"], name: "index_product_type_colors_on_product_type_id"
+  end
+
+  create_table "product_type_sizes", force: :cascade do |t|
+    t.integer "product_type_id", null: false
+    t.string "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "\"product_type\", \"size\"", name: "unique_size", unique: true
+    t.index ["product_type_id"], name: "index_product_type_sizes_on_product_type_id"
   end
 
   create_table "product_types", force: :cascade do |t|
@@ -91,5 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_105759) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "product_types"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_type_colors", "product_types"
+  add_foreign_key "product_type_sizes", "product_types"
   add_foreign_key "product_types", "products"
 end

@@ -76,3 +76,5 @@ gem "devise", "~> 4.9"
 gem "sassc-rails"
 gem "bootstrap"
 gem 'htmlbeautifier'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'

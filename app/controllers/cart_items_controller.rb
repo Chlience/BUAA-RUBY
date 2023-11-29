@@ -7,6 +7,7 @@ class CartItemsController < ApplicationController
 
   # POST /cart_items or /cart_items.json
   def create
+    puts params
     @cart_item = CartItem.new(cart_item_params)
     if @cart_item.product_type_id.nil?
       redirect_back(fallback_location: root_path, notice: "请选择商品类型" )
@@ -64,6 +65,6 @@ class CartItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cart_item_params
-      params.require(:cart_item).permit(:product_type_id, :quantity)
+      params.require(:cart_item).permit(:product_type_id, :size, :color, :quantity)
     end
 end

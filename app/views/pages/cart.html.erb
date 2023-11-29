@@ -10,7 +10,7 @@
           <%= link_to cart_item.product_type.product.product_name, cart_item.product_type.product %>
         </div>
         <div class="cart-son item-props">
-          <%= cart_item.product_type.product_type_name %>
+          <%= cart_item.product_type.product_type_name + "+"  + cart_item.color + "+" + cart_item.size %>
         </div>
         <div class="cart-son">
           <%= cart_item.product_type.price %>

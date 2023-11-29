@@ -1,41 +1,115 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @product %>
-
+<%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
+  <%= render @product %>
+<% end %>
 <div>
   <p>
-    <%= form_with model: @cart_item do |f| %>
+    <div id="price_field"> </div>
+  </p>
+  <p>
+    <%= form_with(model: @cart_item) do |form| %>
+      <%# <div class="field"> %>
+      <%# <%= form.label :product_type_id, '类型' %>
+      <%# <%= form.collection_radio_buttons :product_type_id, @product.product_types, :id, :product_type_name %>
+      <%# </div> %>
+      <div class="field" id="type_field">
+        <%= form.label :product_type_id, '类型' %>
+        <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} %>
+      </div>
+      <div class="field" id="color_field">
+        <%= form.label :color %>
+        <%= form.select :color, []%>
+      </div>
+      <div class="field" id="size_field">
+        <%= form.label :size %>
+        <%= form.select :size, [] %>
+      </div>
       <div>
-        <%= f.label :product_type_id, '类型' %>
-        <%= f.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]}, prompt: '选择商品类型' %>
+        <%= form.label :quantity, '数量:' %>
+        <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
       </div>
-
-      <div class="field">
-        <% if @cart_item.product_type_id.blank? %>
-          <p class="warning"> 请选择商品类型 </p>
-        <% end %>
-      </div>
-          
-      <div>
-        <%= f.label :quantity, '数量:' %><br>
-        <%= f.number_field :quantity, :value => 1, step: 1, min: 1 %>
-      </div>
-
-      <%= f.submit '立即购买', name: "buy" %>
-      <%= f.submit '加入购物车', name: "cart" %>
+      <%= form.submit '立即购买', name: "buy" %>
+      <%= form.submit '加入购物车', name: "cart" %>
     <% end %>
   </p>
-
-  <p> 
+  <p>
     <% if current_user.favorite?(@product) %>
       <%= button_to '取消收藏', product_favorite_path(@product), method: :delete %>
     <% else %>
       <%= button_to '收藏', product_favorite_path(@product), method: :post %>
     <% end %>
   </p>
-
   <%= link_to "Edit this product", edit_product_path(@product) %> |
   <%= link_to "Back to products", products_path %>
-
   <%= button_to "Destroy this product", @product, method: :delete %>
 </div>
+<script>
+  // 获取表单元素
+  var productId = document.getElementById("product-id").dataset.id;
+  var productTypeIdField = document.getElementById('cart_item_product_type_id');
+  var colorField = document.getElementById("color_field");
+  var sizeField = document.getElementById("size_field");
+  var priceField = document.getElementById("price_field");
+
+  function productTypeChange() {
+    console.log("product type changed")
+    var selectedProductTypeId = productTypeIdField.value;
+    var colorSelect = colorField.querySelector("select");
+    var sizeSelect = sizeField.querySelector("select");
+    if (selectedProductTypeId == "") {
+      colorSelect.innerHTML = '';
+      sizeSelect.innerHTML = '';
+      priceField.textContent = "???"
+    } else {
+      fetch('/products/' + productId + '/product_types/' + selectedProductTypeId + '/price')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        priceField.textContent = "￥" + data;
+      }).catch(error => console.error("Error:", error));
+
+      fetch('/products/' + productId + '/product_types/' + selectedProductTypeId + '/colors')
+      .then(response => response.json())
+      .then(data => {
+        colorSelect.innerHTML = '';
+        data.forEach(function(color) {
+          var option = document.createElement("option");
+          option.value = color;
+          option.text = color;
+          colorSelect.appendChild(option);
+        });
+      }).catch(error => console.error("Error:", error));
+
+      fetch('/products/' + productId + '/product_types/' + selectedProductTypeId + '/colors')
+      .then(response => response.json())
+      .then(data => {
+        colorSelect.innerHTML = '';
+        data.forEach(function(color) {
+          var option = document.createElement("option");
+          option.value = color;
+          option.text = color;
+          colorSelect.appendChild(option);
+        });
+      }).catch(error => console.error("Error:", error));
+
+      fetch('/products/' + productId + '/product_types/' + selectedProductTypeId + '/sizes')
+      .then(response => response.json())
+      .then(data => {
+        sizeSelect.innerHTML = '';
+        data.forEach(function(size) {
+          var option = document.createElement("option");
+          option.value = size;
+          option.text = size;
+          sizeSelect.appendChild(option);
+        });
+      }).catch(error => console.error("Error:", error));
+    }
+    console.log("colorSelect.innerHTML: " + colorSelect.innerHTML)
+  }
+
+  productTypeChange();
+
+  productTypeIdField.addEventListener('change', function() {
+    productTypeChange();
+  });
+</script>

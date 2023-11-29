@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'product_types/colors'
   resources :orders, only: [:index, :create, :destroy, :update]
 
   get 'main', to: 'pages#main'
@@ -20,9 +21,19 @@ Rails.application.routes.draw do
   end
 
   resources :products do
+    member do
+      post 'new_cart', to: 'products#new_cart', as: 'new_cart'
+      # 这里假设你有一个名为 CartsController 的控制器，你可以根据实际情况进行调整
+    end
     resource :favorite, only: [:create, :destroy]
     resource :cart_item, only: [:create]
-    resources :product_types, only: [:show]
+    resources :product_types, only: [:show] do
+      member do
+        get 'colors', to: 'product_types#colors', as: 'colors'
+        get 'sizes', to: 'product_types#sizes', as: 'sizes'
+        get 'price', to: 'product_types#price', as: 'price'
+      end
+    end
   end
 
   resources :favorites, only: [:index]

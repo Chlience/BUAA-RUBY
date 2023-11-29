@@ -27,6 +27,8 @@ class OrdersController < ApplicationController
       @order_item = OrderItem.new()
       @order_item.order = @order
       @order_item.product_type = cart_item.product_type
+      @order_item.size = cart_item.size
+      @order_item.color = cart_item.color
       @order_item.quantity = cart_item.quantity
       @order_item.price = cart_item.quantity * cart_item.product_type.price
       @order_item.save
