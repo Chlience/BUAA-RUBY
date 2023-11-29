@@ -1,3 +1,8 @@
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <%= render @product %>
 <div>
   <%= link_to "新建商品类型", new_product_product_type_path(@product) %>
