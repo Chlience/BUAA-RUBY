@@ -1,10 +1,21 @@
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+<div class="container">
+  <div class="row", style="justify-content: start;">
+    <% @products.each do |product| %>
+      <div class="col-xl-4", style="padding: 5px 20px;">
+        <div class="row", style="justify-content: center;">
+          <%= link_to product , class: "col-12 item-link" do %>
+            <div class="row", style="justify-content: start;">
+              <div class= "col-5">
+                <img class="product_pic" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" ></img>
+            </div>
+            <div class="col">
+              <%= render product %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
-
+</div>
 <%= link_to "New product", new_product_path %>

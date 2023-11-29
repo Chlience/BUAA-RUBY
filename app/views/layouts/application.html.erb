@@ -18,23 +18,13 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <%= link_to  '/main', class: "nav-link active"  do %>
-              <i class="bi bi-house"></i> 首页
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to  '/main', class: "nav-link text-white"  do %>
+          <li>
+            <%= link_to  '/main', class: "nav-link text-white toolbar1"  do %>
               <i class="bi bi-house"></i> 首页
             <% end %>
           </li>
           <li>
-            <%= link_to '/cart',class: "nav-link active" do %>
-              <i class="bi bi-cart-fill"></i> 购物车
-            <% end %>
-          </li>
-          <li>
-            <%= link_to '/cart',class: "nav-link text-white" do %>
+            <%= link_to '/cart',class: "nav-link text-white toolbar1"  do %>
               <i class="bi bi-cart-fill"></i> 购物车
             <% end %>
           </li>
@@ -85,6 +75,7 @@
       </div>
     <% end %>
     <div id="main-panel">
+      <%= request.original_fullpath%>
       <%= yield %>
     </div>
   </body>
