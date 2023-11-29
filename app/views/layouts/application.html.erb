@@ -29,6 +29,16 @@
             <% end %>
           </li>
           <li>
+            <%= link_to  "/my_favorites" , class:"nav-link text-white toolbar1" do %>
+              <i class="bi bi-star-fill"></i> 我的收藏(<%=current_user.favorites.count.to_s%>)
+            <% end %>
+          </li>
+          <li>
+            <%= link_to  "/my_orders" , class:"nav-link text-white toolbar1" do %>
+              <i class="bi bi-file-post-fill"></i> 订单(<%=current_user.orders.count.to_s%>)
+            <% end %>
+          </li>
+          <li>
             <%= link_to '/manage',class: "nav-link text-white toolbar1"  do %>
               <i class="bi bi-box2"></i></i> 管理
           <% end %>

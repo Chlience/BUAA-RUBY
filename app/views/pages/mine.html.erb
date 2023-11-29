@@ -1,15 +1,27 @@
 <h1> <%= current_user.username %> </h1>
-
-<div>
-	<%= link_to "收藏的：" + current_user.favorites.count.to_s, "/my_favorites" %> 
-</div>
-
-<div>
-	<%= link_to "全部订单：" + current_user.orders.count.to_s, "/my_orders" %> 
-</div>
-
-<br>
-
-<div>
-	<%= link_to '退出登录', destroy_user_session_path, data: { turbo_cart_itemmethod: :delete, turbo_confirm: '确定要退出登陆吗？'} %>
+<div class="content-container user-content">
+  <div class="row" style="justify-content: start;">
+    <div class="offset-lg-1 offset-sm-4 col-4">
+      <img src="https://github.com/mdo.png" class="bd-placeholder-img rounded-circle" width="140" height="140">
+      <h2 class="fw-normal"> <%= current_user.username %> </h2>
+      <p>user sign</p>
+      <%# <p><a class="btn btn-secondary" href="#">View details »</a></p> %>
+    </div>
+    <div class="col-sm-12 col-lg">
+      <div class="row">
+        <div class="col-6">
+          <%= link_to  "/my_favorites" , class:"btn btn-warning text-white" do %>
+            <div class="fs-2"><i class="bi bi-star-fill"></i> 我的收藏(<%=current_user.favorites.count.to_s%>)</div >
+          <% end %>
+        </div>
+        <div  class="col-6">
+          <%= link_to "全部订单：" + current_user.orders.count.to_s, "/my_orders" %>
+        </div>
+        <br>
+        <div  class="col-6">
+          <%= link_to '退出登录', destroy_user_session_path, data: { turbo_cart_itemmethod: :delete, turbo_confirm: '确定要退出登陆吗？'} %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

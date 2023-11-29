@@ -1,11 +1,12 @@
-<div class="container", style="magin:100px">
+<div class="content-container">
   <div class="row" style="justify-content: start;">
     <% @products.each do |product| %>
-      <div class="col-xxl-4" style="padding: 5px 20px;">
+      <div class="col-xxl-4 col-xl-6" style="padding: 5px 20px;">
         <div class="row" style="justify-content:center;">
           <%= link_to product, class: "col-12 item-link" do %>
             <div class="row" style="justify-content: start;">
-              <div class= "col-4" style="padding:0px 0px 0px 10px">
+              <div class= "col-4" style="padding:0px 0px 0px 10px;
+	min-width: 130px;">
                 <img class="product_pic" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" ></img>
             </div>
             <div class="col">
@@ -14,7 +15,11 @@
               </div>
               <div class = "row " style="display:flex;">
                 <p style="margin:0px">
-                  <span style="font-size:12px;color:orange;" >￥</span><span style="font-size:20px;font-weight:bold;font-family:Microsoft Yahei;color:orange;" ><%= product.product_types.first.price %></span>
+                  <% if !product.product_types.nil? && !product.product_types.first.nil? && product.product_types.first.respond_to?(:price) %>
+                    <span style="font-size:12px;color:orange;" >￥</span><span style="font-size:20px;font-weight:bold;font-family:Microsoft Yahei;color:orange;" ><%= product.product_types.first.price %></span>
+                  <% else %>
+                    <span style="font-size:20px;font-weight:bold;font-family:Simsun;color:orange;" > 商品暂无定价 </span>
+                  <% end %>
                 </p>
               </div>
             </div>
@@ -24,5 +29,5 @@
     </div>
   <% end %>
 </div>
-</div>
 <%= link_to "New product", new_product_path %>
+</div>
