@@ -8,4 +8,26 @@
     </p>
   <% end %>
 </div>
-<%= link_to "New product", new_product_path %>
+<div>
+  <%= link_to "新建商品", new_product_path %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">名称</th>
+      <th scope="col">描述</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <th scope="row"> <%= product.id %> </th>
+        <td> <%= product.product_name %> </td>
+        <td> <%= product.description %> </td>
+        <td> <%= link_to "管理商品", edit_product_path(product) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -8,10 +8,6 @@
   </p>
   <p>
     <%= form_with(model: @cart_item) do |form| %>
-      <%# <div class="field"> %>
-      <%# <%= form.label :product_type_id, '类型' %>
-      <%# <%= form.collection_radio_buttons :product_type_id, @product.product_types, :id, :product_type_name %>
-      <%# </div> %>
       <div class="field" id="type_field">
         <%= form.label :product_type_id, '类型' %>
         <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} %>

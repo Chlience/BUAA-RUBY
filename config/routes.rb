@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'cart', to: 'pages#cart'
   post 'cart', to: 'orders#create'
   get 'mine', to: 'pages#mine'
+  get 'manage', to: 'pages#manage'
   get 'my_orders', to: 'pages#orders'
   get 'my_favorites', to: 'pages#favorites'
 
@@ -20,6 +21,9 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index]
   end
 
+  # resources :product_types, only: [:new, :create, :destroy] do
+  # end
+
   resources :products do
     member do
       post 'new_cart', to: 'products#new_cart', as: 'new_cart'
@@ -27,7 +31,7 @@ Rails.application.routes.draw do
     end
     resource :favorite, only: [:create, :destroy]
     resource :cart_item, only: [:create]
-    resources :product_types, only: [:show] do
+    resources :product_types, only: [:new, :create, :destroy] do
       member do
         get 'colors', to: 'product_types#colors', as: 'colors'
         get 'sizes', to: 'product_types#sizes', as: 'sizes'
