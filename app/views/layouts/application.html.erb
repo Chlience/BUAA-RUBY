@@ -28,55 +28,64 @@
               <i class="bi bi-cart-fill"></i> 购物车
             <% end %>
           </li>
-          <%# <li><%= link_to '我的', '/mine',class: "nav-link text-white" </li> %>
-        </ul>
-        <hr>
-        <% if user_signed_in? %>
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong><%= current_user.username %></strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                <%= link_to destroy_user_session_path, class:"dropdown-item", data: { turbo_method: :delete, turbo_confirm: '确定要退出登陆吗？'} do%>
-                  <i class="bi bi-box-arrow-right"></i> 退出登录
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        <% else %>
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>未登录</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li>
-                <%= link_to  new_registration_path(resource_name), class: "dropdown-item" do%>
-                  <i class="bi bi-door-open"></i> 注册
-                <% end %>
-              </li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                <%= link_to new_user_session_url, class:"dropdown-item" do%>
-                  <i class="bi bi-box-arrow-in-right"></i> 登录
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <div id="main-panel">
-      <%= request.original_fullpath%>
-      <%= yield %>
+          <li>
+            <%= link_to '/manage',class: "nav-link text-white toolbar1"  do %>
+              <i class="bi bi-box2"></i></i> 管理
+          <% end %>
+        </li>
+        <%# <li><%= link_to '我的', '/mine',class: "nav-link text-white" </li> %>
+      </ul>
+      <hr>
+      <% if user_signed_in? %>
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong><%= current_user.username %></strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <%# <li><a class="dropdown-item" href="#">New project...</a></li> %>
+            <%# <li><a class="dropdown-item" href="#">Settings</a></li> %>
+            <li>
+              <%= link_to '/mine', class: "dropdown-item" do %>
+                <i class="bi bi-person"></i> 我的
+              <% end %>
+            </li>
+            <%# <li><hr class="dropdown-divider"></li> %>
+            <li>
+              <%= link_to destroy_user_session_path, class:"dropdown-item", data: { turbo_method: :delete, turbo_confirm: '确定要退出登陆吗？'} do%>
+                <i class="bi bi-box-arrow-right"></i> 退出登录
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>未登录</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li>
+              <%= link_to  new_registration_path(resource_name), class: "dropdown-item" do%>
+                <i class="bi bi-door-open"></i> 注册
+              <% end %>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <%= link_to new_user_session_url, class:"dropdown-item" do%>
+                <i class="bi bi-box-arrow-in-right"></i> 登录
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
     </div>
-  </body>
+  <% end %>
+  <div id="main-panel">
+    <%= request.original_fullpath%>
+    <%= yield %>
+  </div>
+</body>
 </html>
