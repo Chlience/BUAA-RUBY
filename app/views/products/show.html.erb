@@ -1,12 +1,14 @@
 <p style="color: green"><%= notice %></p>
-<%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
-  <%= render @product %>
-<% end %>
-<div>
-  <p>
-    <div id="price_field"> </div>
-  </p>
-  <p>
+<div class="content-container">
+  <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
+    <p>
+      <strong> <%= @product.product_name %></strong>
+    </p>
+  <% end %>
+  <div>
+    <p>
+      <div id="price_field"> </div>
+    </p>
     <%= form_with(model: @cart_item) do |form| %>
       <div class="field" id="type_field">
         <%= form.label :product_type_id, '类型' %>
@@ -26,13 +28,16 @@
       </div>
       <%= form.submit '立即购买', name: "buy" %>
       <%= form.submit '加入购物车', name: "cart" %>
+      <% if current_user.favorite?(@product) %>
+        <%= link_to '取消收藏', product_favorite_path(@product), data: { turbo_method: :delete}%>
+      <% else %>
+        <%= link_to '收藏', product_favorite_path(@product), data: { turbo_method: :post}%>
+      <% end %>
     <% end %>
-  </p>
-  <p>
-    <% if current_user.favorite?(@product) %>
-      <%= button_to '取消收藏', product_favorite_path(@product), method: :delete %>
-    <% else %>
-      <%= button_to '收藏', product_favorite_path(@product), method: :post %>
+    <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
+      <p>
+        <%= @product.description %>
+      </p>
     <% end %>
   </p>
 </div>
