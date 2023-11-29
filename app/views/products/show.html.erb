@@ -13,11 +13,11 @@
         <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} %>
       </div>
       <div class="field" id="color_field">
-        <%= form.label :color %>
+        <%= form.label :color, '颜色' %>
         <%= form.select :color, []%>
       </div>
       <div class="field" id="size_field">
-        <%= form.label :size %>
+        <%= form.label :size, '尺码'%>
         <%= form.select :size, [] %>
       </div>
       <div>

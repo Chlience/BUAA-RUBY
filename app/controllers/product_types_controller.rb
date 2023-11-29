@@ -1,18 +1,43 @@
 class ProductTypesController < ApplicationController
-  before_action :set_product_type, only: [:destroy]
-  before_action :set_product, only: [:new]
+  before_action :set_product_type, only: [:destroy, :edit, :update]
+  before_action :set_product, only: [:new, :edit, :create]
 
   def new
     @product_type = ProductType.new
   end
+
+  def edit
+    @product_type_size = ProductTypeSize.new
+    @product_type_color = ProductTypeColor.new
+  end
+
+  def update
+    if @product_type.save!
+      redirect_back(fallback_location: root_path, notice: "商品类型更新成功！")
+    else
+      redirect_back(fallback_location: root_path, notice: "商品类型更新失败！")
+    end
+  end
   
   def create
-    # TODO
+    @product_type = ProductType.new(product_type_name: params[:product_type][:product_type_name], product_id: params[:product_id], price: params[:product_type][:price])
+    respond_to do |format|
+      if @product_type.save!
+        format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建成功！" }
+      else
+        format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建失败！" }
+      end
+    end
   end
   
   def destroy
-    puts @product_type.product_type_name
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      if @product_type.destroy!
+        redirect_back(fallback_location: root_path, notice: "商品类型删除成功！")
+      else
+        redirect_back(fallback_location: root_path, notice: "商品类型删除失败！")
+      end
+    end
   end
   
   def colors

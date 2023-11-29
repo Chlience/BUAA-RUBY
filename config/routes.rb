@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'product_type_colors/create'
   get 'product_types/colors'
   resources :orders, only: [:index, :create, :destroy, :update]
 
@@ -31,12 +32,14 @@ Rails.application.routes.draw do
     end
     resource :favorite, only: [:create, :destroy]
     resource :cart_item, only: [:create]
-    resources :product_types, only: [:new, :create, :destroy] do
+    resources :product_types, only: [:new, :create, :destroy, :update, :edit] do
       member do
         get 'colors', to: 'product_types#colors', as: 'colors'
         get 'sizes', to: 'product_types#sizes', as: 'sizes'
         get 'price', to: 'product_types#price', as: 'price'
       end
+      resources :product_type_colors, only: [:create, :destroy]
+      resources :product_type_sizes, only: [:create, :destroy]
     end
   end
 

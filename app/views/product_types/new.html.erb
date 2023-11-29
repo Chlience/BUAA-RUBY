@@ -1,3 +1,16 @@
 <h1>ProductTypes#new</h1>
 <%= render @product %>
+<%= form_with(model: [@product, @product_type]) do |form| %>
+  <div class="field">
+    <%= form.label :product_type_name %>
+    <%= form.text_field :product_type_name %>
+  </div>
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
 <p>Find me in app/views/product_types/new.html.erb</p>

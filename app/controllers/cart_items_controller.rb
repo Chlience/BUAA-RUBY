@@ -7,10 +7,13 @@ class CartItemsController < ApplicationController
 
   # POST /cart_items or /cart_items.json
   def create
-    puts params
     @cart_item = CartItem.new(cart_item_params)
     if @cart_item.product_type_id.nil?
-      redirect_back(fallback_location: root_path, notice: "请选择商品类型" )
+      redirect_back(fallback_location: root_path, notice: "请选择商品类型！" )
+    elsif @cart_item.size.nil?
+      redirect_back(fallback_location: root_path, notice: "请选择尺码！" )
+    elsif @cart_item.color.nil?
+      redirect_back(fallback_location: root_path, notice: "请选择颜色！" )
     else
       @cart_item.user_id = current_user.id
 

@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">价格</th>
       <th scope="col">尺码</th>
       <th scope="col">颜色</th>
       <th scope="col"></th>
@@ -15,12 +16,11 @@
     <% @product.product_types.each do |product_type| %>
       <tr>
         <th scope="row"> <%= product_type.product_type_name %> </th>
+        <td> <%= product_type.price %> </td>
         <td> <%= product_type.product_type_sizes.pluck(:size).join(', ') %> </td>
         <td> <%= product_type.product_type_colors.pluck(:color).join(', ') %> </td>
         <td>
-          <%= link_to "修改尺码" %>
-          <%= link_to "修改颜色" %>
-          <%= link_to "修改颜色" %>
+          <%= link_to "修改", edit_product_product_type_path(@product, product_type) %>
           <%= link_to "删除", product_product_type_path(@product, product_type), data: { turbo_method: :delete, turbo_confirm: '确定要删除该商品类型吗？'} %>
         </td>
       </tr>

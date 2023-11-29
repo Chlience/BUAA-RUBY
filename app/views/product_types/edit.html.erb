@@ -1,0 +1,74 @@
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<h1>ProductTypes#edit</h1>
+<%= render @product %>
+<%= form_with(model: [@product, @product_type]) do |form| %>
+  <div class="field">
+    <%= form.label :product_type_name, '商品类型名称' %>
+    <%= form.text_field :product_type_name %>
+  </div>
+  <div class="field">
+    <%= form.label :price, '售价' %>
+    <%= form.number_field :price %>
+  </div>
+  <div class="actions">
+    <%= form.submit "更新" %>
+  </div>
+<% end %>
+<%= form_with(model: [@product, @product_type, @product_type_size]) do |form| %>
+  <div class="field">
+    <%= form.label :size, '尺码大小' %>
+    <%= form.text_field :size %>
+  </div>
+  <div class="actions">
+    <%= form.submit "新建尺码" %>
+  </div>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">尺码</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_type.product_type_sizes.each do |size| %>
+      <tr>
+        <th scope="row"> <%= size.size %> </th>
+        <td>
+          <%= link_to "删除", product_product_type_product_type_size_path(@product, @product_type, size), data: { turbo_method: :delete, turbo_confirm: '确定要删除该尺码吗？'} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= form_with(model: [@product, @product_type, @product_type_color]) do |form| %>
+  <div class="field">
+    <%= form.label :color, '颜色类型' %>
+    <%= form.text_field :color %>
+  </div>
+  <div class="actions">
+    <%= form.submit "新建颜色" %>
+  </div>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">颜色</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_type.product_type_colors.each do |color| %>
+      <tr>
+        <th scope="row"> <%= color.color %> </th>
+        <td>
+          <%= link_to "删除", product_product_type_product_type_color_path(@product, @product_type, color), data: { turbo_method: :delete, turbo_confirm: '确定要删除该尺码吗？'} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
