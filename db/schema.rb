@@ -61,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_054822) do
     t.string "color", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "\"product_type\", \"color\"", name: "unique_color", unique: true
     t.index ["product_type_id"], name: "index_product_type_colors_on_product_type_id"
   end
 
@@ -70,7 +69,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_054822) do
     t.string "size", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "\"product_type\", \"size\"", name: "unique_size", unique: true
     t.index ["product_type_id"], name: "index_product_type_sizes_on_product_type_id"
   end
 
