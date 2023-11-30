@@ -18,7 +18,7 @@
                   <% if !product.product_types.nil? && !product.product_types.first.nil? && product.product_types.first.respond_to?(:price) && !product.product_types.first.price.nil? %>
                     <span style="font-size:12px;color:orange;" >￥</span><span style="font-size:20px;font-weight:bold;font-family:Microsoft Yahei;color:orange;" ><%= product.product_types.first.price %></span>
                   <% else %>
-                    <span style="font-size:20px;font-weight:bold;font-family:Simsun;color:orange;" > 商品暂无定价 </span>
+                    <span style="font-size:20px;font-weight:bold;font-family:Simsun;color:orange;"> 商品暂无定价 </span>
                   <% end %>
                 </p>
               </div>
