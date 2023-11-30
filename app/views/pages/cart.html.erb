@@ -21,6 +21,9 @@
         <div class="cart-son">
           <%= "数量：" + cart_item.quantity.to_s %>
         </div>
+        <div class="cart-son">
+          <%= link_to "删除", cart_item_path(cart_item), data: { turbo_method: :delete } %>
+        </div>
       </div>
     <% end %>
     <div>

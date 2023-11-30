@@ -52,7 +52,7 @@ class CartItemsController < ApplicationController
     @cart_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to cart_items_url, notice: "Cart item was successfully destroyed." }
+      format.html { redirect_back(fallback_location: root_path) }
       format.json { head :no_content }
     end
   end
