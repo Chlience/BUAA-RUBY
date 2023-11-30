@@ -1,4 +1,5 @@
 class ProductTypeSizesController < ApplicationController
+	before_action :authenticate_user!
 	before_action :set_product_type_size, only: [:destroy]
 
 	def create

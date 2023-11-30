@@ -11,10 +11,9 @@
   </head>
   <body>
     <% if user_signed_in? %>
-      <%# <main class="d-flex flex-nowrap" style="height: 100vh;"> %>
       <div id="left-panel" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <span class="fs-4"><i class="bi bi-clipboard2-fill"></i>  菜单</span>
+          <span class="fs-4"><i class="bi bi-clipboard2-fill"></i> 菜单</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
@@ -29,89 +28,66 @@
             <% end %>
           </li>
           <li>
-            <%= link_to  "/my_favorites" , class:"nav-link text-white toolbar1" do %>
+            <%= link_to  "/my_favorites", class:"nav-link text-white toolbar1" do %>
               <i class="bi bi-star-fill"></i> 我的收藏(<%=current_user.favorites.count.to_s%>)
             <% end %>
           </li>
           <li>
-            <%= link_to  "/my_orders" , class:"nav-link text-white toolbar1" do %>
+            <%= link_to  "/my_orders", class:"nav-link text-white toolbar1" do %>
               <i class="bi bi-file-post-fill"></i> 订单(<%=current_user.orders.count.to_s%>)
             <% end %>
           </li>
           <% if current_user.admin? %>
             <li>
-              <%= link_to products_path ,class: "nav-link text-white toolbar1" do %>
-                <i class="bi bi-box2"></i></i> 商品管理
-            <% end %>
-          </li>
-          <li>
-            <%= link_to orders_path ,class: "nav-link text-white toolbar1"  do %>
-              <i class="bi bi-receipt-cutoff"></i> 订单管理
-            <% end %>
-          </li>
-          <li>
-            <%= link_to users_path ,class: "nav-link text-white toolbar1"  do %>
-              <i class="bi bi-person-gear"></i> 用户管理
-            <% end %>
-          </li>
+              <%= link_to products_path, class: "nav-link text-white toolbar1" do %>
+                <i class="bi bi-box2"></i> 商品管理
+              <% end %>
+            </li>
+            <li>
+              <%= link_to orders_path, class: "nav-link text-white toolbar1"  do %>
+                <i class="bi bi-receipt-cutoff"></i> 订单管理
+              <% end %>
+            </li>
+            <li>
+              <%= link_to users_path, class: "nav-link text-white toolbar1"  do %>
+                <i class="bi bi-person-gear"></i> 用户管理
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <hr>
+        <% if user_signed_in? %>
+          <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+              <strong><%= current_user.username %></strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+              <%# <li><a class="dropdown-item" href="#">New project...</a></li> %>
+              <%# <li><a class="dropdown-item" href="#">Settings</a></li> %>
+              <li>
+                <%= link_to edit_user_path(current_user), class: "dropdown-item" do %>
+                  <i class="bi bi-person"></i> 修改个人信息
+                <% end %>
+              </li>
+              <%# <li><hr class="dropdown-divider"></li> %>
+              <li>
+                <%= link_to destroy_user_session_path, class:"dropdown-item", data: { turbo_method: :delete, turbo_confirm: '确定要退出登陆吗？'} do%>
+                  <i class="bi bi-box-arrow-right"></i> 退出登录
+                <% end %>
+              </li>
+            </ul>
+          </div>
         <% end %>
-        <%# <li><%= link_to '我的', '/mine',class: "nav-link text-white" </li> %>
-      </ul>
-      <hr>
-      <% if user_signed_in? %>
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong><%= current_user.username %></strong>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <%# <li><a class="dropdown-item" href="#">New project...</a></li> %>
-            <%# <li><a class="dropdown-item" href="#">Settings</a></li> %>
-            <li>
-              <%= link_to edit_user_path(current_user), class: "dropdown-item" do %>
-                <i class="bi bi-person"></i> 修改个人信息
-              <% end %>
-            </li>
-            <%# <li><hr class="dropdown-divider"></li> %>
-            <li>
-              <%= link_to destroy_user_session_path, class:"dropdown-item", data: { turbo_method: :delete, turbo_confirm: '确定要退出登陆吗？'} do%>
-                <i class="bi bi-box-arrow-right"></i> 退出登录
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      <% else %>
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>未登录</strong>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li>
-              <%= link_to  new_registration_path(resource_name), class: "dropdown-item" do%>
-                <i class="bi bi-door-open"></i> 注册
-              <% end %>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <%= link_to new_user_session_url, class:"dropdown-item" do%>
-                <i class="bi bi-box-arrow-in-right"></i> 登录
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-  <div id="main-panel">
-    <% if flash[:notice].present? %>
-      <div class="alert alert-success">
-        <%= flash[:notice] %>
       </div>
     <% end %>
-    <%= yield %>
-  </div>
-</body>
+    <div id="main-panel">
+      <% if flash[:notice].present? %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
 </html>

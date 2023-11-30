@@ -1,4 +1,5 @@
 class ProductTypeColorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_product_type_color, only: [:destroy]
 
   def create

@@ -1,4 +1,5 @@
 class OrderItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_order_item, only: [:destroy]
 
   def destroy

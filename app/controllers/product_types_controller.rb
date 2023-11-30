@@ -1,4 +1,5 @@
 class ProductTypesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_product_type, only: [:destroy, :edit, :update]
   before_action :set_product, only: [:new, :edit, :create, :update]
 
