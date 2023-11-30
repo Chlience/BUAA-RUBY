@@ -26,12 +26,23 @@
         <%= form.label :quantity, '数量:' %>
         <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
       </div>
-      <%= form.submit '立即购买', name: "buy" %>
-      <%= form.submit '加入购物车', name: "cart" %>
+      <%= form.submit name: "buy" do %>
+        立即购买
+      <% end %>
+      <%# <%= form.submit "购物车", class:"btn btn-warning"%> %>
+      <button type="submit" name="car" class="btn btn-primary">
+        <i class="fas fa-save"></i> Save Product
+      </button>
+      <%# <i class="fa fa-check"></i> Save %>
+      <%# <% end %>
       <% if current_user.favorite?(@product) %>
-        <%= link_to '取消收藏', product_favorite_path(@product), data: { turbo_method: :delete}%>
+        <%= link_to product_favorite_path(@product), data: { turbo_method: :delete},class:"btn btn-outline-warning"  do %>
+          <i class="bi bi-star-fill"></i> 取消收藏
+        <% end %>
       <% else %>
-        <%= link_to '收藏', product_favorite_path(@product), data: { turbo_method: :post}%>
+        <%= link_to product_favorite_path(@product), data: { turbo_method: :post}, class:"btn btn-outline-warning" do %>
+          <i class="bi bi-star"></i> 收藏
+        <% end %>
       <% end %>
     <% end %>
     <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>

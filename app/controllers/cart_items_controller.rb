@@ -8,6 +8,7 @@ class CartItemsController < ApplicationController
   # POST /cart_items or /cart_items.json
   def create
     @cart_item = CartItem.new(cart_item_params)
+
     if @cart_item.product_type_id.nil?
       redirect_back(fallback_location: root_path, notice: "请选择商品类型！" )
     elsif @cart_item.size.nil?
@@ -22,7 +23,7 @@ class CartItemsController < ApplicationController
       @cart_item.attributes.each do |attribute, value|
         puts "#{attribute}: #{value}"
       end
-      
+
       if @old_cart_item.nil?
         @old_cart_item = @cart_item
       else
