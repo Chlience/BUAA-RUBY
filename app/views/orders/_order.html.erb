@@ -30,10 +30,4 @@
   <div>
     <%= "电话：" + order.delivery_phone %>
   </div>
-  <% if order.status == "已下单" %>
-    <%= form_with(model: order) do |f| %>
-      <%= f.hidden_field :status, value: "已取消" %>
-      <%= f.submit '取消订单' %>
-    <% end %>
-  <% end %>
 </div>

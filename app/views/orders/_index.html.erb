@@ -30,7 +30,7 @@
           <td> <%= order.status %> </td>
           <td>
             <div class="btn-group me-2">
-              <% if order.已发货? %>
+              <% if order.待收货? %>
                 <%= link_to settle_order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :post, turbo_confirm: '确定要收货吗'} do %>
                   确认收货
                 <% end %>

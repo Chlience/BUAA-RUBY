@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  enum status: { 已下单: 0, 已发货: 1, 已完成: 2, 已取消: 3 }
+  enum status: { 待发货: 0, 待收货: 1, 已完成: 2, 已取消: 3, 待取消: 4 }
   
   belongs_to :user
   has_many :order_items, dependent: :destroy

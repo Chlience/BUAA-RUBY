@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def deliver
-    @order.update(status: "已发货")
+    @order.update(status: "待收货")
     redirect_back(fallback_location: root_path)
   end
 
@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     delivery_address: params[:order][:delivery_address],
     delivery_phone: params[:order][:delivery_phone],
     delivery_name: params[:order][:delivery_name],
-    status: "已下单")
+    status: "待发货")
     puts @order
     @order.save
 
@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
       cart_item.destroy
     end
     
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, notice: "成功创建订单！")
   end
 
   def edit

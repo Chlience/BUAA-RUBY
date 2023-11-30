@@ -19,12 +19,12 @@ class PagesController < ApplicationController
   end
 
   def wait_delivery_orders
-    @orders = Order.where(user: current_user, status: "已下单").order(created_at: :desc)
+    @orders = Order.where(user: current_user, status: "待发货").order(created_at: :desc)
     render "orders"
   end
 
   def wait_settle_orders
-    @orders = Order.where(user: current_user, status: "已发货").order(created_at: :desc)
+    @orders = Order.where(user: current_user, status: "待收货").order(created_at: :desc)
     render "orders"
   end
 
