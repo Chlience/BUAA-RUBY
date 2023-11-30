@@ -11,19 +11,15 @@ class CartItemsController < ApplicationController
 
     if @cart_item.product_type_id.nil?
       redirect_back(fallback_location: root_path, notice: "请选择商品类型！" )
-    elsif @cart_item.size.nil?
+    elsif @cart_item.size.blank?
       redirect_back(fallback_location: root_path, notice: "请选择尺码！" )
-    elsif @cart_item.color.nil?
+    elsif @cart_item.color.blank?
       redirect_back(fallback_location: root_path, notice: "请选择颜色！" )
     else
       @cart_item.user_id = current_user.id
 
-      @old_cart_item = CartItem.find_by(product_type_id: @cart_item.product_type_id, user_id: @cart_item.user_id)
-
-      @cart_item.attributes.each do |attribute, value|
-        puts "#{attribute}: #{value}"
-      end
-
+      @old_cart_item = CartItem.find_by(product_type_id: @cart_item.product_type_id, size: @cart_item.size, color: @cart_item.color, user_id: @cart_item.user_id)
+      
       if @old_cart_item.nil?
         @old_cart_item = @cart_item
       else

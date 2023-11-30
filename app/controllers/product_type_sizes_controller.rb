@@ -3,6 +3,9 @@ class ProductTypeSizesController < ApplicationController
 
 	def create
 		@product_type_size = ProductTypeSize.new(product_type_id: params[:product_type_id], size: params[:product_type_size][:size])
+		if @product_type_size.size.blank?
+			redirect_back(fallback_location: root_path, notice: "尺码不能为空！")
+		end
 		if @product_type_size.save!
 			redirect_back(fallback_location: root_path, notice: "尺码添加成功！")
 		else

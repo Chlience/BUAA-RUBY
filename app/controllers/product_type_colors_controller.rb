@@ -3,6 +3,9 @@ class ProductTypeColorsController < ApplicationController
 
   def create
     @product_type_color = ProductTypeColor.new(product_type_id: params[:product_type_id], color: params[:product_type_color][:color])
+		if @product_type_color.color.blank?
+			redirect_back(fallback_location: root_path, notice: "颜色不能为空！")
+    end
     if @product_type_color.save!
       redirect_back(fallback_location: root_path, notice: "颜色添加成功！")
     else

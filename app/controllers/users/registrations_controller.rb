@@ -10,9 +10,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    if User.all.count == 1
+      @user.admin = true
+      @user.save
+      puts "Admin created"
+    else 
+      puts "Admin not created"
+    end
+  end
 
   # GET /resource/edit
   # def edit
