@@ -38,21 +38,23 @@
               <i class="bi bi-file-post-fill"></i> 订单(<%=current_user.orders.count.to_s%>)
             <% end %>
           </li>
+          <% if current_user.admin? %>
+            <li>
+              <%= link_to products_path ,class: "nav-link text-white toolbar1" do %>
+                <i class="bi bi-box2"></i></i> 商品管理
+            <% end %>
+          </li>
           <li>
-            <%= link_to products_path ,class: "nav-link text-white toolbar1"  do %>
-              <i class="bi bi-box2"></i></i> 商品管理
-          <% end %>
-        </li>
-        <li>
-          <%= link_to orders_path ,class: "nav-link text-white toolbar1"  do %>
-            <i class="bi bi-receipt-cutoff"></i> 订单管理
-          <% end %>
-        </li>
-        <li>
-          <%= link_to users_path ,class: "nav-link text-white toolbar1"  do %>
-            <i class="bi bi-person-gear"></i> 用户管理
-          <% end %>
-        </li>
+            <%= link_to orders_path ,class: "nav-link text-white toolbar1"  do %>
+              <i class="bi bi-receipt-cutoff"></i> 订单管理
+            <% end %>
+          </li>
+          <li>
+            <%= link_to users_path ,class: "nav-link text-white toolbar1"  do %>
+              <i class="bi bi-person-gear"></i> 用户管理
+            <% end %>
+          </li>
+        <% end %>
         <%# <li><%= link_to '我的', '/mine',class: "nav-link text-white" </li> %>
       </ul>
       <hr>
