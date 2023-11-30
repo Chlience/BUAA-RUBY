@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :deliver, :settle]
 
   def index
     @orders = Order.where(user: current_user)
@@ -11,6 +11,16 @@ class OrdersController < ApplicationController
     @order.price = @cart_items.each.sum { |cart_item| cart_item.total_price }
 
     redirect_to new_order_path
+  end
+
+  def deliver
+    @order.update(status: "已发货")
+    redirect_back(fallback_location: root_path)
+  end
+
+  def settle
+    @order.update(status: "已完成")
+    redirect_back(fallback_location: root_path)
   end
 
   def create

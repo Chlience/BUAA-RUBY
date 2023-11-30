@@ -1,6 +1,57 @@
-<div>
-	<% @orders.each do |o| %>
-		<%= render o %>
-		<br>
-	<% end %>
+<div class="container manage-table-container" >
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">用户</th>
+        <th scope="col">总价</th>
+        <th scope="col">状态</th>
+        <th scope="col">下单时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <th scope="row"> <%= order.id %> </th>
+          <td> <%= link_to order.user.username, order.user %> </td>
+          <td> <%= order.total_price %> </td>
+          <td> <%= order.status %> </td>
+          <td> <%= order.created_at %> </td>
+          <td>
+            <% order.order_items.each do |order_item| %>
+              <span style="font-weight: bold;"> <%= order_item.product_type.product.product_name %>； </span>
+              <span style="color: gray;"> 类型: <%= order_item.product_type.product_type_name %>； </span>
+              <span style="color: gray;"> 尺码: <%= order_item.size %>； </span>
+              <span style="color: gray;"> 颜色: <%= order_item.color %>； </span>
+              <span style=""> 单价: <%= order_item.product_type.price %>； </span>
+              <span style=""> 数量: <%= order_item.quantity %>； </span>
+              <span style=""> 总价: <%= order_item.total_price %>； </span>
+              <br>
+            <% end %>
+          </td>
+          <td>
+            <div class="btn-group me-2">
+              <% if order.已发货? %>
+                <%= link_to settle_order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :post, turbo_confirm: '确定要收货吗'} do %>
+                  确认收货
+                <% end %>
+              <% else %>
+                <%= link_to settle_order_path(order), class:"btn btn-sm btn-outline-secondary disabled", data: { turbo_method: :post, turbo_confirm: '确定要收货吗'} do %>
+                  确认收货
+                <% end %>
+              <% end %>
+            </div>
+            <div class="btn-group me-2">
+              <%= link_to edit_order_path(order), class:"btn btn-sm btn-outline-secondary" do %>
+                查看订单
+              <% end %>
+              <%= link_to order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
+                删除订单
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

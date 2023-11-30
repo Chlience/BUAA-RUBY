@@ -1,4 +1,3 @@
-<p style="color: green"><%= notice %></p>
 <h1>订单管理</h1>
 <div class="container manage-table-container" >
   <table class="table">
@@ -21,8 +20,14 @@
           <td> <%= order.created_at %> </td>
           <td>
             <div class="btn-group me-2">
-              <%= link_to order_path(order), class:"btn btn-sm btn-outline-secondary disabled", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
-                确认发货
+              <% if order.已下单? %>
+                <%= link_to deliver_order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :post, turbo_confirm: '确定要发货吗'} do %>
+                  确认发货
+                <% end %>
+              <% else %>
+                <%= link_to deliver_order_path(order), class:"btn btn-sm btn-outline-secondary disabled", data: { turbo_method: :post, turbo_confirm: '确定要发货吗'} do %>
+                  确认发货
+                <% end %>
               <% end %>
             </div>
             <div class="btn-group me-2">

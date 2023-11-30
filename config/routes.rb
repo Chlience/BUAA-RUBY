@@ -46,6 +46,10 @@ Rails.application.routes.draw do
   delete 'favorites/:id', to: 'favorites#delete', as: 'favorite'
 
   resources :orders, only: [:index, :create, :destroy, :update, :edit] do
+    member do
+      post 'deliver', to: 'orders#deliver', as: 'deliver'
+      post 'settle', to: 'orders#settle', as: 'settle'
+    end
     resources :order_items, only: [:destroy]  
   end
 

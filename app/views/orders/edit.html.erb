@@ -1,57 +1,60 @@
 <h1>Order#edit</h1>
-<%= render @order %>
-<div class="container manage-table-container" >
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">商品名</th>
-        <th scope="col">类型</th>
-        <th scope="col">尺码</th>
-        <th scope="col">颜色</th>
-        <th scope="col">单价</th>
-        <th scope="col">数量</th>
-        <th scope="col">总价</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @order.order_items.each do |order_item| %>
+<div>
+  <div class="container" >
+    <%= form_with(model: [@order]) do |form| %>
+      <div class="field">
+        <%= form.label :delivery_address, '收件地址' %>
+        <%= form.text_field :delivery_address %>
+      </div>
+      <div class="field">
+        <%= form.label :delivery_name, '收件人' %>
+        <%= form.text_field :delivery_name %>
+      </div>
+      <div class="field">
+        <%= form.label :delivery_phone, '手机' %>
+        <%= form.number_field :delivery_phone %>
+      </div>
+      <div class="actions">
+        <%= form.submit "更新" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="container manage-table-container" >
+    <table class="table">
+      <thead>
         <tr>
-          <th scope="row"> <%= order_item.id %> </th>
-          <td> <%= order_item.product_type.product.product_name %> </td>
-          <td> <%= order_item.product_type.product_type_name %> </td>
-          <td> <%= order_item.size %> </td>
-          <td> <%= order_item.color %> </td>
-          <td> <%= order_item.price %> </td>
-          <td> <%= order_item.quantity %> </td>
-          <td> <%= order_item.price %> </td>
-          <td>
-            <div class="btn-group me-2">
-              <%= link_to order_order_item_path(@order, order_item), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单项吗？'} do %>
-                删除订单项
-              <% end %>
-            </div>
-          </td>
+          <th scope="col">#</th>
+          <th scope="col">商品名</th>
+          <th scope="col">类型</th>
+          <th scope="col">尺码</th>
+          <th scope="col">颜色</th>
+          <th scope="col">单价</th>
+          <th scope="col">数量</th>
+          <th scope="col">总价</th>
+          <th scope="col"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @order.order_items.each do |order_item| %>
+          <tr>
+            <th scope="row"> <%= order_item.id %> </th>
+            <td> <%= order_item.product_type.product.product_name %> </td>
+            <td> <%= order_item.product_type.product_type_name %> </td>
+            <td> <%= order_item.size %> </td>
+            <td> <%= order_item.color %> </td>
+            <td> <%= order_item.price %> </td>
+            <td> <%= order_item.quantity %> </td>
+            <td> <%= order_item.price %> </td>
+            <td>
+              <div class="btn-group me-2">
+                <%= link_to order_order_item_path(@order, order_item), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单项吗？'} do %>
+                  删除订单项
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-<%= form_with(model: [@order]) do |form| %>
-  <div class="field">
-    <%= form.label :delivery_address, '收件地址' %>
-    <%= form.text_field :delivery_address %>
-  </div>
-  <div class="field">
-    <%= form.label :delivery_name, '收件人' %>
-    <%= form.number_field :delivery_name %>
-  </div>
-  <div class="field">
-    <%= form.label :delivery_phone, '手机' %>
-    <%= form.number_field :delivery_phone %>
-  </div>
-  <div class="actions">
-    <%= form.submit "更新" %>
-  </div>
-<% end %>
