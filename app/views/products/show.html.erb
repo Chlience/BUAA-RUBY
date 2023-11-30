@@ -6,16 +6,16 @@
     </div>
     <div class = "", style="width:400px">
       <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
-        <p>
-          <strong> <%= @product.product_name %></strong>
+        <p style="font-size:40px;padding-bottom:0px;margin-bottom:0px">
+          <%= @product.product_name %>
         </p>
-        <p>
+        <p style = "color:grey;margin-top:0px;">
           <%= @product.description %>
         </p>
       <% end %>
       <div>
         <p>
-          <div id="price_field"> <br>
+          <div id="price_field" style="font-size:20px;font-weight:bold;font-family:Microsoft Yahei;color:orange;"> <br>
           </div>
         </p>
         <%= form_with(model: @cart_item) do |form| %>
@@ -28,15 +28,21 @@
               <% end %>
             <% end %>
           </div>
-          <div class="field" id="color_field">
-            <%= form.label :color, '颜色:' %>
-            <%= form.select :color, [] %>
+          <div class = "row", style="margin-top:10px;margin-bottom:20px">
+            <div class = "col-4">
+              <div class="field" id="color_field">
+                <%= form.label :color, '颜色:' %>
+                <%= form.select :color, [] %>
+              </div>
+            </div>
+            <div class = "col">
+              <div class="field" id="size_field">
+                <%= form.label :size, '尺码:'%>
+                <%= form.select :size, [] %>
+              </div>
+            </div>
           </div>
-          <div class="field" id="size_field">
-            <%= form.label :size, '尺码:'%>
-            <%= form.select :size, [] %>
-          </div>
-          <div>
+          <div style="margin-bottom:105px">
             <%= form.label :quantity, '数量:' %>
             <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
           </div>
@@ -88,7 +94,7 @@
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        priceField.textContent = "￥" + data;
+        priceField.textContent = "￥"+data;
       }).catch(error => console.error("Error:", error));
 
       fetch('/products/' + productId + '/product_types/' + selectedProductTypeId + '/colors')
