@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'product_type_colors/create'
   get 'product_types/colors'
-  resources :orders, only: [:index, :create, :destroy, :update]
 
   get 'main', to: 'pages#main'
   get 'cart', to: 'pages#cart'
@@ -46,6 +45,9 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index]
   delete 'favorites/:id', to: 'favorites#delete', as: 'favorite'
 
-  root "pages#main"
+  resources :orders, only: [:index, :create, :destroy, :update, :edit] do
+    resources :order_items, only: [:destroy]  
+  end
 
+  root "pages#main"
 end

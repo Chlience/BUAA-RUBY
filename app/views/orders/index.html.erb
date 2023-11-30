@@ -1,6 +1,41 @@
-<div>
-	<% @orders.each do |o| %>
-		<%= render o %>
-		<br>
-	<% end %>
+<p style="color: green"><%= notice %></p>
+<h1>订单管理</h1>
+<div class="container manage-table-container" >
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">用户</th>
+        <th scope="col">总价</th>
+        <th scope="col">状态</th>
+        <th scope="col">创建时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <th scope="row"> <%= order.id %> </th>
+          <td> <%= link_to order.user.username, order.user %> </td>
+          <td> <%= order.total_price %> </td>
+          <td> <%= order.status %> </td>
+          <td> <%= order.created_at %> </td>
+          <td>
+            <div class="btn-group me-2">
+              <%= link_to order_path(order), class:"btn btn-sm btn-outline-secondary disabled", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
+                确认发货
+              <% end %>
+            </div>
+            <div class="btn-group me-2">
+              <%= link_to edit_order_path(order), class:"btn btn-sm btn-outline-secondary" do %>
+                管理订单
+              <% end %>
+              <%= link_to order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
+                删除订单
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

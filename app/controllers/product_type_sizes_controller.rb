@@ -6,7 +6,7 @@ class ProductTypeSizesController < ApplicationController
 		if @product_type_size.size.blank?
 			redirect_back(fallback_location: root_path, notice: "尺码不能为空！")
 		end
-		if @product_type_size.save!
+		if @product_type_size.save
 			redirect_back(fallback_location: root_path, notice: "尺码添加成功！")
 		else
 			redirect_back(fallback_location: root_path, notice: "尺码添加失败！")

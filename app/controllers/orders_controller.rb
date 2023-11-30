@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
+
   def index
     @orders = Order.where(user: current_user)
   end
@@ -14,13 +16,12 @@ class OrdersController < ApplicationController
   def create
     @cart_items = CartItem.where(id: params[:order][:cart_item_ids])
 
-    @order = Order.new()
-    @order.user = current_user
-    @order.delivery_address = params[:order][:delivery_address]
-    @order.delivery_phone = params[:order][:delivery_phone]
-    @order.delivery_name = params[:order][:delivery_name]
-    @order.price = @cart_items.each.sum { |cart_item| cart_item.total_price }
-    @order.status = "已下单"
+    @order = Order.new(user: current_user,
+    delivery_address: params[:order][:delivery_address],
+    delivery_phone: params[:order][:delivery_phone],
+    delivery_name: params[:order][:delivery_name],
+    status: "已下单")
+    puts @order
     @order.save
 
     @cart_items.each do |cart_item|
@@ -30,7 +31,7 @@ class OrdersController < ApplicationController
       @order_item.size = cart_item.size
       @order_item.color = cart_item.color
       @order_item.quantity = cart_item.quantity
-      @order_item.price = cart_item.quantity * cart_item.product_type.price
+      @order_item.price = cart_item.product_type.price
       @order_item.save
     end
 
@@ -41,11 +42,15 @@ class OrdersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
+  def edit
+  end
 
-    redirect_back(fallback_location: root_path)
+  def destroy
+    if @order.destroy!
+      redirect_back(fallback_location: root_path, notice: "订单删除成功！")
+    else
+      redirect_back(fallback_location: root_path, notice: "订单删除失败！")
+    end
   end
 
   def update
@@ -62,5 +67,9 @@ class OrdersController < ApplicationController
 
     def update_order_params
       params.require(:order).permit(:status)
+    end
+
+    def set_order
+      @order = Order.find(params[:id])
     end
 end

@@ -94,7 +94,11 @@
     </div>
   <% end %>
   <div id="main-panel">
-    <%= request.original_fullpath%>
+    <% if flash[:notice].present? %>
+      <div class="alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
     <%= yield %>
   </div>
 </body>

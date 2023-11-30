@@ -15,7 +15,7 @@ class ProductTypesController < ApplicationController
     @product_type.product_type_name = params[:product_type][:product_type_name]
     @product_type.price = params[:product_type][:price]
     respond_to do |format|
-      if @product_type.save!
+      if @product_type.save
         format.html { redirect_to edit_product_path(@product), notice: "商品类型更新成功！" }
       else
         format.html { redirect_to edit_product_path(@product), notice: "商品类型更新失败！" }
@@ -26,7 +26,7 @@ class ProductTypesController < ApplicationController
   def create
     @product_type = ProductType.new(product_type_name: params[:product_type][:product_type_name], product_id: params[:product_id], price: params[:product_type][:price])
     respond_to do |format|
-      if @product_type.save!
+      if @product_type.save
         format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建成功！" }
       else
         format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建失败！" }

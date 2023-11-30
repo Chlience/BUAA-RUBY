@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     if User.all.count == 1
-      @user.admin = true
+      @user.role = "admin"
       @user.save
       puts "Admin created"
     else 

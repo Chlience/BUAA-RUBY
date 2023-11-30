@@ -6,7 +6,7 @@ class ProductTypeColorsController < ApplicationController
 		if @product_type_color.color.blank?
 			redirect_back(fallback_location: root_path, notice: "颜色不能为空！")
     end
-    if @product_type_color.save!
+    if @product_type_color.save
       redirect_back(fallback_location: root_path, notice: "颜色添加成功！")
     else
       redirect_back(fallback_location: root_path, notice: "颜色添加失败！")
@@ -14,7 +14,7 @@ class ProductTypeColorsController < ApplicationController
   end
 
   def destroy
-    if @product_type_color.destroy!
+    if @product_type_color.destroy
       redirect_back(fallback_location: root_path, notice: "颜色删除成功！")
     else
       redirect_back(fallback_location: root_path, notice: "颜色删除失败！")
