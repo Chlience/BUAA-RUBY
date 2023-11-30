@@ -3,21 +3,21 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col"> </th>
         <th scope="col">名称</th>
-        <th scope="col"></th>
         <th scope="col">描述</th>
-        <th scope="col"></th>
+        <th scope="col"> </th>
       </tr>
     </thead>
     <tbody>
       <% @favorites.each do |favorite| %>
         <tr>
           <th scope="row"> <%= favorite.favorite_product.id %> </th>
-          <td>
+          <td style="width:200px">
             <img class="product_pic" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" >
           </td>
           <td>
-            <%= link_to favorite.favorite_product.product_name, favorite.favorite_product %>
+            <p><%= link_to favorite.favorite_product.product_name, favorite.favorite_product %></p>
           </td>
           <td> <%= favorite.favorite_product.description %> </td>
           <td>

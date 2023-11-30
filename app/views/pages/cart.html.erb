@@ -1,16 +1,19 @@
-<div id="cart">
-  <div class="cart-fliter-bar">
-    <h1> 购物车 </h1>
-  </div>
+<div class="content-container" style="width:1100px;margin-left:auto;margin-right:auto">
+  <p style="font-size: 40px;"> 购物车</p>
   <%= form_with(model: @order, class: "cart-form") do |f| %>
     <% @cart_items.each do |cart_item| %>
-      <div class="container cart-item-container">
+      <div class="cart-item-container">
         <%= f.check_box :cart_item_ids, { multiple: true }, cart_item.id, nil %>
+        <div class="cart-son">
+          <img class="product_pic_small" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" >
+        </div>
         <div class="cart-son">
           <%= link_to cart_item.product_type.product.product_name, cart_item.product_type.product %>
         </div>
         <div class="cart-son item-props">
-          <%= cart_item.product_type.product_type_name + "+"  + cart_item.color + "+" + cart_item.size %>
+          <%= "类型：" + cart_item.product_type.product_type_name %><br>
+          <%= "颜色："  + cart_item.color %><br>
+          <%= "尺码：" + cart_item.size %><br>
         </div>
         <div class="cart-son">
           <%= cart_item.product_type.price %>
