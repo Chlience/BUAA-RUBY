@@ -1,16 +1,18 @@
-<h1>ProductTypes#new</h1>
-<%= render @product %>
-<%= form_with(model: [@product, @product_type]) do |form| %>
-  <div class="field">
-    <%= form.label :product_type_name %>
-    <%= form.text_field :product_type_name %>
-  </div>
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-<p>Find me in app/views/product_types/new.html.erb</p>
+<div style="margin-top:20px;margin-bottom:30px">
+  <h1 style="text-align:center">新建商品类型</h1>
+</div>
+<div class="container", style="display:flex; justify-content: center;">
+  <%= form_with(model: [@product, @product_type]) do |form| %>
+    <div class="field">
+      <%= form.label :product_type_name, '商品类型名称', style: "display: block" %>
+      <%= form.text_field :product_type_name %>
+    </div>
+    <div class="field">
+      <%= form.label :price, '售价', style: "display: block" %>
+      <%= form.number_field :price, step: 0.01%>
+    </div>
+    <div class="actions">
+      <%= form.submit "提交" %>
+    </div>
+  <% end %>
+</div>

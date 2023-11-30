@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy, :deliver, :settle]
+  before_action :is_admin?, only: [:update, :deliver]
 
   def index
-    @orders = Order.where(user: current_user)
+    @orders = Order.all
   end
 
   def new
@@ -65,10 +66,11 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
-    @order.update(update_order_params)
-
-    redirect_back(fallback_location: root_path)
+    if @order.update(order_params)
+      redirect_back(fallback_location: root_path, notice: "订单更新成功！")
+    else
+      redirect_back(fallback_location: root_path, notice: "订单更新失败！")
+    end
   end
 
   private
@@ -76,11 +78,15 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:status, :delivery_address, :delivery_phone, :delivery_name, :cart_item_ids => [])
     end
 
-    def update_order_params
-      params.require(:order).permit(:status)
-    end
-
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def is_admin?
+      if current_user.admin?
+        return true
+      else
+        redirect_back(fallback_location: root_path, notice: "没有权限")
+      end
     end
 end

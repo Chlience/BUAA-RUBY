@@ -5,7 +5,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">用户 ID</th>
         <th scope="col">用户名</th>
         <th scope="col">email</th>
         <th scope="col">注册时间</th>
@@ -22,7 +22,7 @@
           <td>
             <div class="btn-group me-2">
               <%= link_to edit_user_path(user), class:"btn btn-sm btn-outline-secondary" do %>
-                管理用户
+                编辑用户
               <% end %>
               <%= link_to user_path(user), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该用户吗？'} do %>
                 删除用户

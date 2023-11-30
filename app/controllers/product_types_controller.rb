@@ -2,6 +2,7 @@ class ProductTypesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product_type, only: [:destroy, :edit, :update]
   before_action :set_product, only: [:new, :edit, :create, :update]
+  before_action :is_admin?, except: %i[ colors sizes price ]
 
   def new
     @product_type = ProductType.new
@@ -26,8 +27,17 @@ class ProductTypesController < ApplicationController
   
   def create
     @product_type = ProductType.new(product_type_name: params[:product_type][:product_type_name], product_id: params[:product_id], price: params[:product_type][:price])
+
     respond_to do |format|
       if @product_type.save
+        @product_type_size = ProductTypeSize.new
+        @product_type_size.product_type = @product_type
+        @product_type_size.size = "默认"
+        @product_type_size.save
+        @product_type_color = ProductTypeColor.new
+        @product_type_color.product_type = @product_type
+        @product_type_color.color = "默认"
+        @product_type_color.save
         format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建成功！" }
       else
         format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建失败！" }
@@ -64,7 +74,16 @@ class ProductTypesController < ApplicationController
     def set_product_type
       @product_type = ProductType.find(params[:id])
     end
+
     def set_product
       @product = Product.find(params[:product_id])
     end
+
+	  def is_admin?
+      if current_user.admin?
+        return true
+      else
+        redirect_back(fallback_location: root_path, notice: "没有权限")
+      end
+	  end
 end

@@ -5,8 +5,9 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">用户</th>
+        <th scope="col">订单 ID</th>
+        <th scope="col">用户 ID</th>
+        <th scope="col">用户名</th>
         <th scope="col">总价</th>
         <th scope="col">状态</th>
         <th scope="col">创建时间</th>
@@ -16,7 +17,8 @@
       <% @orders.each do |order| %>
         <tr>
           <th scope="row"> <%= order.id %> </th>
-          <td> <%= link_to order.user.username, order.user %> </td>
+          <td> <%= order.user.id %> </td>
+          <td> <%= order.user.username %> </td>
           <td> <%= order.total_price %> </td>
           <td> <%= order.status %> </td>
           <td> <%= order.created_at %> </td>

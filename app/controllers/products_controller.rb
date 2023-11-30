@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :set_cart_item
+  before_action :is_admin?, except: %i[ index show ]
 
   # GET /products or /products.json
   def index
@@ -82,4 +83,12 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:product_name, :description, :product_url)
     end
+
+	  def is_admin?
+      if current_user.admin?
+        return true
+      else
+        redirect_back(fallback_location: root_path, notice: "没有权限")
+      end
+	  end
 end

@@ -27,16 +27,16 @@
       </div>
     <% end %>
     <div>
-      <%= f.label :delivery_address, style: "display: block" %>
+      <%= f.label :delivery_address, "收货地址", style: "display: block" %>
       <%= f.text_field :delivery_address %>
     </div>
     <div>
-      <%= f.label :delivery_phone, style: "display: block" %>
-      <%= f.text_field :delivery_phone %>
+      <%= f.label :delivery_name, "收货人姓名", style: "display: block" %>
+      <%= f.text_field :delivery_name %>
     </div>
     <div>
-      <%= f.label :delivery_name, style: "display: block" %>
-      <%= f.text_field :delivery_name %>
+      <%= f.label :delivery_phone, "收货人电话", style: "display: block" %>
+      <%= f.text_field :delivery_phone %>
     </div>
     <%= f.submit %>
   <% end %>
