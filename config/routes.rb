@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get 'product_type_colors/create'
-  get 'product_types/colors'
-
   get 'main', to: 'pages#main'
   get 'cart', to: 'pages#cart'
   post 'cart', to: 'orders#create'
   get 'mine', to: 'pages#mine'
   get 'manage', to: 'pages#manage'
   get 'my_orders', to: 'pages#orders'
+  get 'wait_delivery_orders', to: 'pages#wait_delivery_orders'
+  get 'wait_settle_orders', to: 'pages#wait_settle_orders'
+  get 'finished_orders', to: 'pages#finished_orders'
   get 'my_favorites', to: 'pages#favorites'
 
   # resource 和 resources 有区别，生成的路径类型不同
@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index]
   end
 
-  # resources :product_types, only: [:new, :create, :destroy] do
-  # end
+  get 'product_type_colors/create'
+  get 'product_types/colors'
 
   resources :products do
     member do

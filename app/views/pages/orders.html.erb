@@ -1,3 +1,6 @@
 <h1> 我的订单 </h1>
-
+<%= link_to "全部订单", my_orders_path %>
+<%= link_to "待发货", wait_delivery_orders_path %>
+<%= link_to "待收货", wait_settle_orders_path %>
+<%= link_to "已完成", finished_orders_path %>
 <%= render "orders/index" %>

@@ -2,21 +2,17 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">用户</th>
+        <th scope="col">订单编号</th>
+        <th scope="col">订单项</th>
         <th scope="col">总价</th>
-        <th scope="col">状态</th>
         <th scope="col">下单时间</th>
+        <th scope="col">状态</th>
       </tr>
     </thead>
     <tbody>
       <% @orders.each do |order| %>
         <tr>
           <th scope="row"> <%= order.id %> </th>
-          <td> <%= link_to order.user.username, order.user %> </td>
-          <td> <%= order.total_price %> </td>
-          <td> <%= order.status %> </td>
-          <td> <%= order.created_at %> </td>
           <td>
             <% order.order_items.each do |order_item| %>
               <span style="font-weight: bold;"> <%= order_item.product_type.product.product_name %>； </span>
@@ -29,6 +25,9 @@
               <br>
             <% end %>
           </td>
+          <td> <%= order.total_price %> </td>
+          <td> <%= order.created_at %> </td>
+          <td> <%= order.status %> </td>
           <td>
             <div class="btn-group me-2">
               <% if order.已发货? %>
@@ -42,9 +41,6 @@
               <% end %>
             </div>
             <div class="btn-group me-2">
-              <%= link_to edit_order_path(order), class:"btn btn-sm btn-outline-secondary" do %>
-                查看订单
-              <% end %>
               <%= link_to order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
                 删除订单
               <% end %>
