@@ -18,7 +18,7 @@
         <tr>
           <th scope="row"> <%= product.id %> </th>
           <td>
-            <img class="product_pic" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" >
+            <%= image_tag(product.product_url, class: "product_pic") %>
           </td>
           <td>
             <%= product.product_name %>

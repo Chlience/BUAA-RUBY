@@ -14,7 +14,7 @@
         <tr>
           <th scope="row"> <%= favorite.favorite_product.id %> </th>
           <td style="width:200px">
-            <img class="product_pic" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" >
+            <%= image_tag(favorite.favorite_product.product_url) %>
           </td>
           <td>
             <p><%= link_to favorite.favorite_product.product_name, favorite.favorite_product %></p>

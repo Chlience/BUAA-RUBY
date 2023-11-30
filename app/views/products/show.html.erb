@@ -2,75 +2,75 @@
   <div class="row justify-content-center">
     <div class = "row justify-content-center content-container", style="padding:20px;max-width:900px;min-width:900px;background-color: #fff;">
       <div class = "", style="width:420px">
-        <img class="product_pic_big" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" ></img>
-    </div>
-    <div class = "", style="width:400px">
-      <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
-        <p style="font-size:40px;padding-bottom:0px;margin-bottom:0px">
-          <%= @product.product_name %>
-        </p>
-        <p style = "color:grey;margin-top:0px;">
-          <%= @product.description %>
-        </p>
-      <% end %>
-      <div>
-        <p>
-          <div id="price_field" style="font-size:20px;font-weight:bold;font-family:Microsoft Yahei;color:orange;"> <br>
-          </div>
-        </p>
-        <%= form_with(model: @cart_item) do |form| %>
-          <div class="field" id="type_field">
-            <%= form.label :product_type_id, '类型:' %>
-            <%# <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:"btn btn-outline-primary"} %>
-            <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:""} do %>
-              <%= @product.product_types.each do |p|  %>
-                <%= tag.option(p.product_type_name, value: p.id, class:"") %>;
+        <%= image_tag(@product.product_url, class: "product_pic_big") %>
+      </div>
+      <div class = "", style="width:400px">
+        <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
+          <p style="font-size:40px;padding-bottom:0px;margin-bottom:0px">
+            <%= @product.product_name %>
+          </p>
+          <p style = "color:grey;margin-top:0px;">
+            <%= @product.description %>
+          </p>
+        <% end %>
+        <div>
+          <p>
+            <div id="price_field" style="font-size:20px;font-weight:bold;font-family:Microsoft Yahei;color:orange;"> <br>
+            </div>
+          </p>
+          <%= form_with(model: @cart_item) do |form| %>
+            <div class="field" id="type_field">
+              <%= form.label :product_type_id, '类型:' %>
+              <%# <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:"btn btn-outline-primary"} %>
+              <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:""} do %>
+                <%= @product.product_types.each do |p|  %>
+                  <%= tag.option(p.product_type_name, value: p.id, class:"") %>;
+                <% end %>
+              <% end %>
+            </div>
+            <div class = "row", style="margin-top:10px;margin-bottom:20px">
+              <div class = "col-4">
+                <div class="field" id="color_field">
+                  <%= form.label :color, '颜色:' %>
+                  <%= form.select :color, [] %>
+                </div>
+              </div>
+              <div class = "col">
+                <div class="field" id="size_field">
+                  <%= form.label :size, '尺码:'%>
+                  <%= form.select :size, [] %>
+                </div>
+              </div>
+            </div>
+            <div style="margin-bottom:105px">
+              <%= form.label :quantity, '数量:' %>
+              <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
+            </div>
+            <button type="submit" name="buy" class="btn btn-danger text-white">
+              <i class="bi bi-box-seam-fill"></i> 立即购买
+            </button>
+            <%# <%= form.submit "购物车", class:"btn btn-warning"%>
+            <button type="submit" name="cart" class="btn btn-warning text-white">
+              <i class="bi bi-cart-check"></i> 加入购物车
+            </button>
+            <%# <i class="fa fa-check"></i> Save %>
+            <%# <% end %>
+            <% if current_user.favorite?(@product) %>
+              <%= link_to product_favorite_path(@product), data: { turbo_method: :delete},class:"btn btn-outline-warning"  do %>
+                <i class="bi bi-star-fill"></i> 取消收藏
+              <% end %>
+            <% else %>
+              <%= link_to product_favorite_path(@product), data: { turbo_method: :post}, class:"btn btn-outline-warning" do %>
+                <i class="bi bi-star"></i> 收藏
               <% end %>
             <% end %>
-          </div>
-          <div class = "row", style="margin-top:10px;margin-bottom:20px">
-            <div class = "col-4">
-              <div class="field" id="color_field">
-                <%= form.label :color, '颜色:' %>
-                <%= form.select :color, [] %>
-              </div>
-            </div>
-            <div class = "col">
-              <div class="field" id="size_field">
-                <%= form.label :size, '尺码:'%>
-                <%= form.select :size, [] %>
-              </div>
-            </div>
-          </div>
-          <div style="margin-bottom:105px">
-            <%= form.label :quantity, '数量:' %>
-            <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
-          </div>
-          <button type="submit" name="buy" class="btn btn-danger text-white">
-            <i class="bi bi-box-seam-fill"></i> 立即购买
-          </button>
-          <%# <%= form.submit "购物车", class:"btn btn-warning"%>
-          <button type="submit" name="cart" class="btn btn-warning text-white">
-            <i class="bi bi-cart-check"></i> 加入购物车
-          </button>
-          <%# <i class="fa fa-check"></i> Save %>
-          <%# <% end %>
-          <% if current_user.favorite?(@product) %>
-            <%= link_to product_favorite_path(@product), data: { turbo_method: :delete},class:"btn btn-outline-warning"  do %>
-              <i class="bi bi-star-fill"></i> 取消收藏
-            <% end %>
-          <% else %>
-            <%= link_to product_favorite_path(@product), data: { turbo_method: :post}, class:"btn btn-outline-warning" do %>
-              <i class="bi bi-star"></i> 收藏
-            <% end %>
           <% end %>
-        <% end %>
-        <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
-        <% end %>
-      </p>
+          <%= content_tag :div, id: 'product-id', data: { id: @product.id } do %>
+          <% end %>
+        </p>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <script>
   // 获取表单元素

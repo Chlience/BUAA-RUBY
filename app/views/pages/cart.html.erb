@@ -5,7 +5,7 @@
       <div class="cart-item-container">
         <%= f.check_box :cart_item_ids, { multiple: true }, cart_item.id, nil %>
         <div class="cart-son">
-          <img class="product_pic_small" src="https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp" >
+          <%= image_tag(cart_item.product_type.product.product_url, class: "product_pic_small") %>
         </div>
         <div class="cart-son">
           <%= link_to cart_item.product_type.product.product_name, cart_item.product_type.product %>
