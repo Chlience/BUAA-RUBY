@@ -132,8 +132,9 @@ img {
 
 .product_pic_big {
 	border-radius: 10px;
-	height: 200px;
-	min-width: 200px;
+	// width: 80%;
+	max-width: 400px;
+	min-width: 400px;
 }
 
 .nav-pills .nav-link.text-white.toolbar1:hover {
