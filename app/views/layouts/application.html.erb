@@ -10,6 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <!-- Always shows a header, even in smaller screens. -->
     <% if user_signed_in? %>
       <div id="left-panel" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">

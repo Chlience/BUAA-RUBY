@@ -52,11 +52,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "更新用户成功！" }
-        format.json { render :show, status: :ok, location: @user }
+        format.html { redirect_back(fallback_location: root_path, notice: "更新用户成功！") }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { redirect_back(fallback_location: root_path, notice: "更新用户失败！") }
       end
     end
   end

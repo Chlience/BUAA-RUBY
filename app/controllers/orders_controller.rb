@@ -27,6 +27,10 @@ class OrdersController < ApplicationController
 
   def create
     @cart_items = CartItem.where(id: params[:order][:cart_item_ids])
+    if @cart_items.blank?
+      redirect_back(fallback_location: root_path, notice: "购物车为空！")
+      return
+    end
 
     @order = Order.new(user: current_user,
     delivery_address: params[:order][:delivery_address],

@@ -1,24 +1,61 @@
-# README
+# BUAA-RUBY
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+本仓库为 BUAA 2023 年度 Ruby 课程课设仓库，包含了课设的所有内容。
 
-Things you may want to cover:
+## 部署方式
 
-* Ruby version
+开发环境：`ruby-3.2.2`, `rails-7.0.8`, `node-21.2.0`
 
-* System dependencies
+在根目录执行以下命令：
 
-* Configuration
+```bash
+$ bundle install
+$ rails db:migrate
+$ rails s
+```
 
-* Database creation
+## 课设内容
 
-* Database initialization
+本仓库实现了一个基于 Ruby 的简易电子商务系统，包含以下功能：
 
-* How to run the test suite
+- 买家操作
+  - 浏览产品列表 => 查看单品详情
+  - 添加到购物车
+  - 购物车内容生成订单
+  - 查看自己的订单列表
+  - 订单操作
+  - 添加产品到收藏夹
+  - 浏览收藏夹
+  - 将产品从收藏夹内删除
+  - 修改个人信息
+- 管理员操作
+  - 添加 / 编辑 / 查看 / 删除产品
+  - 查看所有订单列表
+  - 处理订单（发货 / 删除）
 
-* Services (job queues, cache servers, search engines, etc.)
+## 使用教程
 
-* Deployment instructions
+启动后，访问 `localhost:3000` 即可进入用户登陆页面，进行登陆或注册操作。
+第一个注册的用户将自动提升为管理员，目前只允许存在一个管理员。
+登陆完成后即可进入主页，进行浏览、购物、收藏、查看订单等操作。
 
-* ...
+用户选择产品并加入购物车后，可以在购物车页面进行结算，生成订单。
+订单生成后，用户可以在订单页面查看自己的订单。
+管理员可以在订单页面查看所有订单，并对订单进行处理（发货 / 删除）。
+管理员完成发货后，用户可以在订单页面进行收货操作。
+
+同时，用户在产品详情页面可以对产品进行收藏，收藏的产品可以在收藏夹页面查看。
+用户可以在收藏夹页面对收藏的产品进行删除操作。
+
+用户可以在左下角的下拉框中选择修改个人信息，包括用户名、密码、邮箱。
+也可以选择退出登陆，退出登陆后将返回登陆页面。
+
+目前默认管理员账号为 `admin@admin.com`，密码为 `123456`
+
+## 后续开发工作
+
+- [ ] 增加更多商品详情（类型，描述，细分分类）
+- [ ] 增加评论功能
+- [ ] 增加搜索功能
+- [ ] 页面美化和 AJAX 优化
+- [ ] 用户画像和商品推荐

@@ -1,7 +1,7 @@
 class ProductTypeSizesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_product_type_size, only: [:destroy]
-	before_action :is_admin!
+	before_action :is_admin?
 
 	def create
 		@product_type_size = ProductTypeSize.new(product_type_id: params[:product_type_id], size: params[:product_type_size][:size])
