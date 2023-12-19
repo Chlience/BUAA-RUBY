@@ -14,7 +14,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <%= form_with(model: @product) do |form| %>
+          <%= form_with(model: @product, id: "update_product_form") do |form| %>
             <% if @product.errors.any? %>
               <div style="color: red">
                 <h2><%= pluralize(@product.errors.count, "error") %> prohibited this @product from being saved:</h2>
@@ -37,14 +37,11 @@
               <%= form.label :product_url, "图片 URL", style: "display: block"  %>
               <%= form.text_field :product_url , class: "form-control"%>
             </div>
-            <div  class="update-button">
-              <%= form.submit "更新"  , class: "btn btn-primary mb-3" %>
-            </div>
           <% end %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+          <button id="update_product_submit_button" type="button" class="btn btn-primary"> 提交 </button>
         </div>
       </div>
     </div>
@@ -85,3 +82,8 @@
     </tbody>
   </table>
 </div>
+<script>
+  document.getElementById("update_product_submit_button").addEventListener("click", function() {
+    document.getElementById("update_product_form").submit();
+  });
+</script>
