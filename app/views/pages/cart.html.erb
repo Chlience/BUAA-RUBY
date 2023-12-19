@@ -31,6 +31,6 @@
     <div class="form-group">
       <%= f.select :address_id, current_user.addresses.map{ |address| [[address.delivery_address, address.delivery_name, address.delivery_phone].join(", "), address.id]}, { prompt: '请选择收件地址' }, { class: 'form-control' } %>
     </div>
-    <%= f.submit %>
+    <%= f.submit "提交订单", class: "btn btn-primary mb-3" %>
   <% end %>
 </div>

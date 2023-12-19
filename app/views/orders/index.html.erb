@@ -23,25 +23,21 @@
           <td> <%= order.status %> </td>
           <td> <%= order.created_at %> </td>
           <td>
-            <div class="btn-group me-2">
-              <% if order.待发货? %>
-                <%= link_to deliver_order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :post, turbo_confirm: '确定要发货吗'} do %>
-                  确认发货
-                <% end %>
-              <% else %>
-                <%= link_to deliver_order_path(order), class:"btn btn-sm btn-outline-secondary disabled", data: { turbo_method: :post, turbo_confirm: '确定要发货吗'} do %>
-                  确认发货
-                <% end %>
+            <% if order.待发货? %>
+              <%= link_to deliver_order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :post, turbo_confirm: '确定要发货吗'} do %>
+                确认发货
               <% end %>
-            </div>
-            <div class="btn-group me-2">
-              <%= link_to edit_order_path(order), class:"btn btn-sm btn-outline-secondary" do %>
-                管理订单
+            <% else %>
+              <%= link_to deliver_order_path(order), class:"btn btn-sm btn-outline-secondary disabled", data: { turbo_method: :post, turbo_confirm: '确定要发货吗'} do %>
+                确认发货
               <% end %>
-              <%= link_to order_path(order), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
-                删除订单
-              <% end %>
-            </div>
+            <% end %>
+            <%= link_to edit_order_path(order), class:"btn btn-sm btn-outline-secondary" do %>
+              管理订单
+            <% end %>
+            <%= link_to order_path(order), class:"btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: '确定要删除该订单吗？'} do %>
+              删除订单
+            <% end %>
           </td>
         </tr>
       <% end %>

@@ -20,14 +20,12 @@
           <td> <%= user.email %> </td>
           <td> <%= user.created_at %> </td>
           <td>
-            <div class="btn-group me-2">
-              <%= link_to edit_user_path(user), class:"btn btn-sm btn-outline-secondary" do %>
-                编辑用户
-              <% end %>
-              <%= link_to user_path(user), class:"btn btn-sm btn-outline-secondary", data: { turbo_method: :delete, turbo_confirm: '确定要删除该用户吗？'} do %>
-                删除用户
-              <% end %>
-            </div>
+            <%= link_to edit_user_path(user), class:"btn btn-sm btn-outline-secondary" do %>
+              编辑用户
+            <% end %>
+            <%= link_to user_path(user), class:"btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: '确定要删除该用户吗？'} do %>
+              删除用户
+            <% end %>
           </td>
         </tr>
       <% end %>

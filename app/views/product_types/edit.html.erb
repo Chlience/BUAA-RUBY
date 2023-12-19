@@ -3,32 +3,72 @@
 </div>
 <div class="container">
   <h2> 基本设置 </h2>
-  <%= form_with(model: [@product, @product_type]) do |form| %>
-    <div class="field">
-      <%= form.label :product_type_name, '商品类型名称', style: "display: block" %>
-      <%= form.text_field :product_type_name %>
+  <ul class="list-group">
+    <li class="list-group-item">
+      商品类型名称: <%= @product_type.product_type_name %>
+    </li>
+    <li class="list-group-item">
+      售价: <%= @product_type.price %>
+    </li>
+  </ul>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    更新
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">更新基本信息</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@product, @product_type], id: "form1") do |form| %>
+            <div>
+              <%= form.label :product_type_name, "商品类型名称", style: "display: block"  %>
+              <%= form.text_field :product_type_name , class: "form-control"%>
+            </div>
+            <div>
+              <%= form.label :price, '售价', style: "display: block" %>
+              <%= form.number_field :price, step: 1 , class: "form-control"%>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+          <button id="update1" type="button" class="btn btn-primary"> 提交 </button>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= form.label :price, '售价', style: "display: block" %>
-      <%= form.number_field :price, step: 0.01%>
-    </div>
-    <div class="actions">
-      <%= form.submit "更新" %>
-    </div>
-  <% end %>
+  </div>
 </div>
 <br>
 <div class="container manage-table-container" >
   <h2> 尺码 </h2>
-  <%= form_with(model: [@product, @product_type, @product_type_size]) do |form| %>
-    <div class="field">
-      <%= form.label :size, '尺码大小' %>
-      <%= form.text_field :size %>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+    新建
+  </button>
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">新建尺码</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@product, @product_type, @product_type_size], id: "form2") do |form| %>
+            <div class="field">
+              <%= form.label :size, '尺码大小' %>
+              <%= form.text_field :size, class: "form-control" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+          <button id="update2" type="button" class="btn btn-primary"> 提交 </button>
+        </div>
+      </div>
     </div>
-    <div class="actions">
-      <%= form.submit "新建尺码" %>
-    </div>
-  <% end %>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -41,22 +81,38 @@
         <tr>
           <th scope="row"> <%= size.size %> </th>
           <td>
-            <%= link_to "删除", product_product_type_product_type_size_path(@product, @product_type, size), data: { turbo_method: :delete }, class: "btn btn-sm btn-outline-secondary" %>
+            <%= link_to "删除", product_product_type_product_type_size_path(@product, @product_type, size), data: { turbo_method: :delete }, class: "btn btn-sm btn-outline-danger" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <h2> 颜色 </h2>
-  <%= form_with(model: [@product, @product_type, @product_type_color]) do |form| %>
-    <div class="field">
-      <%= form.label :color, '颜色类型' %>
-      <%= form.text_field :color %>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+    新建
+  </button>
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">新建颜色</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@product, @product_type, @product_type_color], id:"form3") do |form| %>
+            <div class="field">
+              <%= form.label :color, '颜色类型' %>
+              <%= form.text_field :color %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+          <button id="update3" type="button" class="btn btn-primary"> 提交 </button>
+        </div>
+      </div>
     </div>
-    <div class="actions">
-      <%= form.submit "新建颜色" %>
-    </div>
-  <% end %>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -69,10 +125,25 @@
         <tr>
           <th scope="row"> <%= color.color %> </th>
           <td>
-            <%= link_to "删除", product_product_type_product_type_color_path(@product, @product_type, color), data: { turbo_method: :delete }, class: "btn btn-sm btn-outline-secondary" %>
+            <%= link_to "删除", product_product_type_product_type_color_path(@product, @product_type, color), data: { turbo_method: :delete }, class: "btn btn-sm btn-outline-danger" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+<script>
+  document.getElementById("update1").addEventListener("click", function() {
+    document.getElementById("form1").submit();
+  });
+</script>
+<script>
+  document.getElementById("update2").addEventListener("click", function() {
+    document.getElementById("form2").submit();
+  });
+</script>
+<script>
+  document.getElementById("update3").addEventListener("click", function() {
+    document.getElementById("form3").submit();
+  });
+</script>
