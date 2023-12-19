@@ -3,6 +3,26 @@
 </div>
 <div class="container">
   <h2> 基本信息 </h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      商品名称: <%= @product.product_name %>
+    </li>
+    <li class="list-group-item">
+      商品描述: <%= @product.description %>
+    </li>
+    <li class="list-group-item">
+      图片 URL: <%= @product.product_url %>
+    </li>
+  </ul>
+  <%# <div> %>
+  <%# <%= @product.product_name %>
+  <%# </div> %>
+  <%# <div> %>
+  <%# <%= @product.description %>
+  <%# </div> %>
+  <%# <div> %>
+  <%# <%= @product.product_url %>
+  <%# </div> %>
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     修改商品基本信息
   </button>
