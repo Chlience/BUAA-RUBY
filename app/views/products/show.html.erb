@@ -19,32 +19,27 @@
             </div>
           </p>
           <%= form_with(model: @cart_item) do |form| %>
-            <div class="field" id="type_field">
-              <%= form.label :product_type_id, '类型:' %>
-              <%# <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:"btn btn-outline-primary"} %>
-              <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:""} do %>
-                <%= @product.product_types.each do |p|  %>
-                  <%= tag.option(p.product_type_name, value: p.id, class:"") %>;
+            <div class="row" style="margin-bottom:160px">
+              <div class="field" style="margin:3px 0px 3px 0px" id="type_field">
+                <%= form.label :product_type_id, '类型:' %>
+                <%= form.select :product_type_id, @product.product_types.map{ |type| [type.product_type_name, type.id]} , {}, {class:""} do %>
+                  <%= @product.product_types.each do |p|  %>
+                    <%= tag.option(p.product_type_name, value: p.id, class:"") %>;
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
-            <div class = "row", style="margin-top:10px;margin-bottom:20px">
-              <div class = "col-4">
-                <div class="field" id="color_field">
-                  <%= form.label :color, '颜色:' %>
-                  <%= form.select :color, [] %>
-                </div>
               </div>
-              <div class = "col">
-                <div class="field" id="size_field">
-                  <%= form.label :size, '尺码:'%>
-                  <%= form.select :size, [] %>
-                </div>
+              <div class="field" style="margin:3px 0px 3px 0px" id="color_field">
+                <%= form.label :color, '颜色:' %>
+                <%= form.select :color, [] %>
               </div>
-            </div>
-            <div style="margin-bottom:105px">
-              <%= form.label :quantity, '数量:' %>
-              <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
+              <div class="field"  style="margin:3px 0px 3px 0px"id="size_field">
+                <%= form.label :size, '尺码:'%>
+                <%= form.select :size, [] %>
+              </div>
+              <div style="margin-top:3px ;">
+                <%= form.label :quantity, '数量:' %>
+                <%= form.number_field :quantity, :value => 1, step: 1, min: 1 %>
+              </div>
             </div>
             <button type="submit" name="buy" class="btn btn-danger text-white">
               <i class="bi bi-box-seam-fill"></i> 立即购买

@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
+    @new_product = Product.new
     @products = Product.all
   end
 
@@ -28,7 +29,7 @@ class ProductsController < ApplicationController
     if @product.product_url.blank?
       @product.product_url = "https://gw.alicdn.com/bao/uploaded/i1/2508474491/O1CN014jg2pU1j2vcMOqiXq_!!2508474491-0-picasso.jpg_300x300q90.jpg_.webp"
     end
-    
+
     respond_to do |format|
       if @product.save
         @product_type = ProductType.new(product_type_name: "默认", product_id: @product.id, price: 0)
@@ -37,7 +38,7 @@ class ProductsController < ApplicationController
         @product_type_size.save!
         @product_type_color = ProductTypeColor.new(product_type: @product_type, color: "默认")
         @product_type_color.save!
-        
+
         format.html { redirect_to product_url(@product), notice: "商品创建成功！" }
         format.json { render :show, status: :created, location: @product }
       else
