@@ -67,6 +67,11 @@
               <%# <li><a class="dropdown-item" href="#">New project...</a></li> %>
               <%# <li><a class="dropdown-item" href="#">Settings</a></li> %>
               <li>
+                <%= link_to "/my_addresses", class: "dropdown-item" do %>
+                  <i class="bi bi-person"></i> 地址管理
+                <% end %>
+              </li>
+              <li>
                 <%= link_to edit_user_path(current_user), class: "dropdown-item" do %>
                   <i class="bi bi-person"></i> 修改个人信息
                 <% end %>

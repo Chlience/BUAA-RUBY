@@ -1,5 +1,7 @@
+<div style="margin-top:20px;margin-bottom:30px">
+  <h1 style="text-align:center">购物车</h1>
+</div>
 <div class="content-container" style="width:1100px;margin-left:auto;margin-right:auto">
-  <p style="font-size: 40px;"> 购物车</p>
   <%= form_with(model: @order, class: "cart-form") do |f| %>
     <% @cart_items.each do |cart_item| %>
       <div class="cart-item-container">
@@ -26,17 +28,8 @@
         </div>
       </div>
     <% end %>
-    <div>
-      <%= f.label :delivery_address, "收货地址", style: "display: block" %>
-      <%= f.text_field :delivery_address %>
-    </div>
-    <div>
-      <%= f.label :delivery_name, "收货人姓名", style: "display: block" %>
-      <%= f.text_field :delivery_name %>
-    </div>
-    <div>
-      <%= f.label :delivery_phone, "收货人电话", style: "display: block" %>
-      <%= f.text_field :delivery_phone %>
+    <div class="form-group">
+      <%= f.select :address_id, current_user.addresses.map{ |address| [[address.delivery_address, address.delivery_name, address.delivery_phone].join(", "), address.id]}, { prompt: '请选择收件地址' }, { class: 'form-control' } %>
     </div>
     <%= f.submit %>
   <% end %>

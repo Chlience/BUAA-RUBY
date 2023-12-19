@@ -1,0 +1,91 @@
+<div style="margin-top:20px;margin-bottom:30px">
+  <h1 style="text-align:center">地址管理</h1>
+</div>
+<div class="container manage-table-container">
+  <div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      新建地址
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">新建地址</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with(model: @new_address, id: "new_address_form") do |form| %>
+              <% if @new_address.errors.any? %>
+                <div style="color: red">
+                  <h2><%= pluralize(@new_address.errors.count, "error") %> prohibited this @new_address from being saved:</h2>
+                  <ul>
+                    <% @new_address.errors.each do |error| %>
+                      <li><%= error.full_message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div>
+                <%= form.label :delivery_name, "收件人", style: "display: block"  %>
+                <%= form.text_field :delivery_name , class: "form-control"%>
+              </div>
+              <div>
+                <%= form.label :delivery_phone, "收件人电话", style: "display: block"  %>
+                <%= form.text_field :delivery_phone , class: "form-control"%>
+              </div>
+              <div>
+                <%= form.label :delivery_address, "收件地址", style: "display: block"  %>
+                <%= form.text_field :delivery_address , class: "form-control"%>
+              </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+            <button id="new_address_submit_button" type="button" class="btn btn-primary"> 提交 </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">收件人姓名</th>
+        <th scope="col">收件人电话</th>
+        <th scope="col">收件地址</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.addresses.each_with_index do |address, index| %>
+        <tr>
+          <th scope="row">
+            <%= index %>
+          </th>
+          <td>
+            <%= address.delivery_name %>
+          </td>
+          <td>
+            <%= address.delivery_phone %>
+          </td>
+          <td>
+            <%= address.delivery_address %>
+          </td>
+          <td>
+            <div class="btn-group me-2">
+              <%= link_to address_path(address), class:"btn btn-sm btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: '确定要删除该地址吗？'} do %>
+                删除地址
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<script>
+  document.getElementById("new_address_submit_button").addEventListener("click", function() {
+    document.getElementById("new_address_form").submit();
+  });
+</script>

@@ -4,6 +4,10 @@ class PagesController < ApplicationController
   def main
     @products = Product.all
   end
+
+  def addresses
+    @new_address = Address.new
+  end
   
   def cart
     @cart_items = CartItem.where(user: current_user).order(created_at: :desc)

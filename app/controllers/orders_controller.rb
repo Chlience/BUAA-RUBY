@@ -31,11 +31,17 @@ class OrdersController < ApplicationController
       redirect_back(fallback_location: root_path, notice: "购物车为空！")
       return
     end
-
+    
+    if params[:order][:address_id].blank?
+      redirect_back(fallback_location: root_path, notice: "未填写地址！")
+      return
+    end
+    @address = Address.find(params[:order][:address_id]);
+  
     @order = Order.new(user: current_user,
-    delivery_address: params[:order][:delivery_address],
-    delivery_phone: params[:order][:delivery_phone],
-    delivery_name: params[:order][:delivery_name],
+    delivery_address: @address.delivery_address,
+    delivery_name: @address.delivery_name,
+    delivery_phone: @address.delivery_phone,
     status: "待发货")
     puts @order
     @order.save
@@ -79,7 +85,7 @@ class OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:status, :delivery_address, :delivery_phone, :delivery_name, :cart_item_ids => [])
+      params.require(:order).permit(:status, :address_id, :cart_item_ids => [])
     end
 
     def set_order

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'wait_settle_orders', to: 'pages#wait_settle_orders'
   get 'finished_orders', to: 'pages#finished_orders'
   get 'my_favorites', to: 'pages#favorites'
+  get 'my_addresses', to: 'pages#addresses'
 
   # resource 和 resources 有区别，生成的路径类型不同
   # resource 单数资源路由
@@ -52,6 +53,8 @@ Rails.application.routes.draw do
     end
     resources :order_items, only: [:destroy]  
   end
+
+  resources :addresses, only: [:create, :destroy, :update]
 
   root "pages#main"
 end
