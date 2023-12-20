@@ -2,24 +2,61 @@
   <h1 style="text-align:center">修改订单</h1>
 </div>
 <div class="container">
-  <h2>基本信息</h2>
-  <%= form_with(model: [@order]) do |form| %>
-    <div class="field">
-      <%= form.label :delivery_address, '收件地址', style: "display: block" %>
-      <%= form.text_field :delivery_address %>
+  <h2> 基本信息 </h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      收件地址: <%= @order.delivery_address %>
+    </li>
+    <li class="list-group-item">
+      收件人: <%= @order.delivery_name %>
+    </li>
+    <li class="list-group-item">
+      收件人号码: <%= @order.delivery_phone %>
+    </li>
+  </ul>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    编辑基本信息
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">修改订单基本信息</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: @order, id: "update_order_form") do |form| %>
+            <% if @order.errors.any? %>
+              <div style="color: red">
+                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this @order from being saved:</h2>
+                <ul>
+                  <% @order.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div>
+              <%= form.label :delivery_address, "收件地址", style: "display: block"  %>
+              <%= form.text_field :delivery_address , class: "form-control"%>
+            </div>
+            <div>
+              <%= form.label :delivery_name, "收件人", style: "display: block"  %>
+              <%= form.text_field :delivery_name , class: "form-control"%>
+            </div>
+            <div>
+              <%= form.label :delivery_phone, "收件人号码", style: "display: block"  %>
+              <%= form.text_field :delivery_phone , class: "form-control"%>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+          <button id="update_order_submit_button" type="button" class="btn btn-primary"> 提交 </button>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= form.label :delivery_name, '收件人', style: "display: block" %>
-      <%= form.text_field :delivery_name %>
-    </div>
-    <div class="field">
-      <%= form.label :delivery_phone, '手机', style: "display: block" %>
-      <%= form.number_field :delivery_phone %>
-    </div>
-    <div class="actions">
-      <%= form.submit "更新" %>
-    </div>
-  <% end %>
+  </div>
 </div>
 <br>
 <div class="container">
@@ -63,3 +100,8 @@
     </tbody>
   </table>
 </div>
+<script>
+  document.getElementById("update_order_submit_button").addEventListener("click", function() {
+    document.getElementById("update_order_form").submit();
+  });
+</script>

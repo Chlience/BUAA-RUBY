@@ -14,17 +14,8 @@
       图片 URL: <%= @product.product_url %>
     </li>
   </ul>
-  <%# <div> %>
-  <%# <%= @product.product_name %>
-  <%# </div> %>
-  <%# <div> %>
-  <%# <%= @product.description %>
-  <%# </div> %>
-  <%# <div> %>
-  <%# <%= @product.product_url %>
-  <%# </div> %>
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    修改商品基本信息
+    编辑基本信息
   </button>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -35,16 +26,6 @@
         </div>
         <div class="modal-body">
           <%= form_with(model: @product, id: "update_product_form") do |form| %>
-            <% if @product.errors.any? %>
-              <div style="color: red">
-                <h2><%= pluralize(@product.errors.count, "error") %> prohibited this @product from being saved:</h2>
-                <ul>
-                  <% @product.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
             <div>
               <%= form.label :product_name, "商品名称", style: "display: block"  %>
               <%= form.text_field :product_name , class: "form-control"%>
@@ -68,12 +49,37 @@
   </div>
   <%# <%= render "form", product: @product%>
 </div>
-<br>
 <div class="container" >
   <h2> 商品类型信息 </h2>
-  <%= link_to "新建商品类型", new_product_product_type_path(@product), class:"btn btn-primary" %>
-</div>
-<div class="container manage-table-container" >
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+    新建
+  </button>
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">新建商品类型</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with(model: [@product, @new_product_type], id:"new_product_type_form") do |form| %>
+            <div>
+              <%= form.label :product_type_name, '商品类型名称', style: "display: block" %>
+              <%= form.text_field :product_type_name, class: "form-control"  %>
+            </div>
+            <div>
+              <%= form.label :price, '售价', style: "display: block" %>
+              <%= form.number_field :price, step: 0.01, class: "form-control" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> 取消 </button>
+          <button id="new_product_type_submit_button" type="button" class="btn btn-primary"> 提交 </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -103,5 +109,8 @@
 <script>
   document.getElementById("update_product_submit_button").addEventListener("click", function() {
     document.getElementById("update_product_form").submit();
+  });
+  document.getElementById("new_product_type_submit_button").addEventListener("click", function() {
+    document.getElementById("new_product_type_form").submit();
   });
 </script>
