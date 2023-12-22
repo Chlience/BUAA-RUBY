@@ -5,7 +5,7 @@
     <div class="col-auto" style="padding:10px">
       <%= image_tag(@product.product_url, class: "product_pic_big") %>
     </div>
-    <div class="col-auto d-flex flex-column" style="padding:10px">
+    <div class="col-auto d-flex flex-column" style="width:430px; padding:10px">
       <div class="row">
         <p style="font-size:24px;padding-bottom:0px;margin-bottom:0px">
           <%= @product.product_name %>
@@ -20,7 +20,7 @@
       </div>
       <div class="row flex-grow-1">
         <%= form_with(model: @cart_item) do |form| %>
-          <div class="col d-flex flex-column" style="width:430px; height:100%">
+          <div class="col d-flex flex-column" style="height:100%">
             <div class="row">
               <%= form.label :product_type_id, '商品类型', { class: "col-4 col-form-label"} %>
               <div class="col-8", id="type_field">
