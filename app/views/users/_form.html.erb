@@ -13,16 +13,12 @@
         </div>
       <% end %>
       <div class="mb-3">
-        <%= form.label :username%><br />
-        <%= form.text_field :username, class: "form-control" %>
-      </div>
-      <div class="mb-3">
-        <%= form.label :password %><br />
-        <%= form.text_field :password , class: "form-control"%>
-      </div>
-      <div class="mb-3">
         <%= form.label :email %> <br />
         <%= form.text_field :email , class: "form-control"%>
+      </div>
+      <div class="mb-3">
+        <%= form.label :username%><br />
+        <%= form.text_field :username, class: "form-control" %>
       </div>
       <div>
         <%= form.submit "Update User" , class: "btn btn-primary mb-3" %>

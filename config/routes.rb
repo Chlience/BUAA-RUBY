@@ -19,8 +19,7 @@ Rails.application.routes.draw do
   resources :cart_items
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
 
-  # resources :users, only: [:show, :index, :destroy, :edit, :update] do
-    resources :users, only: [:show, :index, :destroy] do
+  resources :users, only: [:show, :index, :destroy, :edit, :update] do
     resources :cart_items, only: [:index]
   end
 
