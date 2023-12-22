@@ -18,9 +18,9 @@ class ProductTypesController < ApplicationController
     @product_type.price = params[:product_type][:price]
     respond_to do |format|
       if @product_type.save
-        format.html { redirect_to edit_product_path(@product), notice: "商品类型更新成功！" }
+        redirect_back(fallback_location: root_path, notice: "商品类型更新成功！")
       else
-        format.html { redirect_to edit_product_path(@product), notice: "商品类型更新失败！" }
+        redirect_back(fallback_location: root_path, notice: "商品类型更新失败！")
       end
     end
   end
@@ -38,9 +38,9 @@ class ProductTypesController < ApplicationController
         @product_type_color.product_type = @product_type
         @product_type_color.color = "默认"
         @product_type_color.save
-        format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建成功！" }
+        redirect_back(fallback_location: root_path, notice: "新商品类型创建成功！")
       else
-        format.html { redirect_to edit_product_path(@product), notice: "新商品类型创建失败！" }
+        redirect_back(fallback_location: root_path, notice: "新商品类型创建失败！")
       end
     end
   end

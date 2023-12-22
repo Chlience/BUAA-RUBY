@@ -102,7 +102,7 @@
           <%= form_with(model: [@product, @product_type, @product_type_color], id:"form3") do |form| %>
             <div class="field">
               <%= form.label :color, '颜色类型' %>
-              <%= form.text_field :color %>
+              <%= form.text_field :color, class: "form-control"  %>
             </div>
           <% end %>
         </div>
