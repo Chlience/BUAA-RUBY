@@ -12,17 +12,13 @@
         <%= f.text_field :username, autocomplete: "username",  class: "form-control" %>
       </div>
       <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password" , class: "form-control" %>
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "new-password" , class: "form-control", placeholder: @minimum_password_length ? @minimum_password_length.to_s + " characters minimum" : ""  %>
       </div>
       <div class="field">
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "form-control" %>
       </div>
-      <br>
       <div class="actions">
         <%= f.submit "Sign up" , class: "btn btn-primary mb-3" %>
       </div>
