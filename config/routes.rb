@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'main', to: 'pages#main'
+  get 'search', to: 'pages#search'
   get 'cart', to: 'pages#cart'
   post 'cart', to: 'orders#create'
   get 'mine', to: 'pages#mine'

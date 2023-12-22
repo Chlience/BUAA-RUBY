@@ -1,12 +1,12 @@
 <div style="margin-top:20px">
-  <h1 style="text-align:center">主页</h1>
+  <h1 style="text-align:center"> 搜索 </h1>
 </div>
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <!-- 搜索表单 -->
       <%= form_with class:"input-group mb-3", url: "/search", method: :get do |form| %>
-        <%= text_field_tag 'q[product_name_cont]', params.dig(:q, :product_name_cont), placeholder: "搜索商品", class:"form-control" %>
+        <%= text_field_tag 'q[product_name_cont]', params.dig(:q, :product_name_cont), placeholder: @search_key, class:"form-control" %>
         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">搜索</button>
       <% end %>
     </div>

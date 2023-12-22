@@ -78,4 +78,4 @@ gem "bootstrap"
 gem 'htmlbeautifier'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'material_design_lite-sass'
+gem 'ransack'

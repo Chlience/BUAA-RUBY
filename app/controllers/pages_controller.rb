@@ -5,6 +5,12 @@ class PagesController < ApplicationController
     @products = Product.all
   end
 
+  def search
+    @q = Product.ransack(params[:q])
+    @search_key = params[:q][:product_name_cont]
+    @products = @q.result(distinct:false)
+  end
+
   def addresses
     @new_address = Address.new
   end
