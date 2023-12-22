@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :favorite_products, through: :favorites
 
   has_many :cart_items, dependent: :destroy
-  has_many :orders
-  has_many :addresses
+  has_many :orders, dependent: :destroy
+  has_many :addresses, dependent: :destroy
 
   def star(product)
     favorites.create(product_id: product.id)
