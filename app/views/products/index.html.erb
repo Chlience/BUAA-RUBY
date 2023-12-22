@@ -27,11 +27,11 @@
               <% end %>
               <div>
                 <%= form.label :product_name, "商品名称", style: "display: block"  %>
-                <%= form.text_field :product_name , class: "form-control"%>
+                <%= form.text_field :product_name , class: "form-control", placeholder: "1 到 20 个字符", maxlength: 20 %>
               </div>
               <div>
                 <%= form.label :description, "商品描述", style: "display: block"  %>
-                <%= form.text_field :description , class: "form-control"%>
+                <%= form.text_field :description , class: "form-control", placeholder: "最大 30 个字符", maxlength: 30 %>
               </div>
               <div>
                 <%= form.label :product_url, "图片 URL", style: "display: block"  %>

@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  validates :product_name, length: { minimum: 1, maximum: 20 }
+  validates :description, length: { maximum: 30 }
   has_many :product_types, dependent: :destroy
   has_many :favorites, dependent: :destroy
 

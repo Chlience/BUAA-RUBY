@@ -25,7 +25,7 @@
           <%= form_with(model: [@product, @product_type], id: "form1") do |form| %>
             <div>
               <%= form.label :product_type_name, "商品类型名称", style: "display: block"  %>
-              <%= form.text_field :product_type_name , class: "form-control"%>
+              <%= form.text_field :product_type_name , class: "form-control", placeholder: "1 到 20 个字符", maxlength: 20%>
             </div>
             <div>
               <%= form.label :price, '售价', style: "display: block" %>
@@ -58,7 +58,7 @@
           <%= form_with(model: [@product, @product_type, @product_type_size], id: "form2") do |form| %>
             <div class="field">
               <%= form.label :size, '尺码大小' %>
-              <%= form.text_field :size, class: "form-control" %>
+              <%= form.text_field :size, class: "form-control", placeholder: "1 到 10 个字符", maxlength: 10 %>
             </div>
           <% end %>
         </div>
@@ -102,7 +102,7 @@
           <%= form_with(model: [@product, @product_type, @product_type_color], id:"form3") do |form| %>
             <div class="field">
               <%= form.label :color, '颜色类型' %>
-              <%= form.text_field :color, class: "form-control"  %>
+              <%= form.text_field :color, class: "form-control", placeholder: "1 到 10 个字符", maxlength: 10 %>
             </div>
           <% end %>
         </div>
